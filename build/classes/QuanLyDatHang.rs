@@ -1,0 +1,10 @@
+covidmanagementsystem.managementsystem.ManagerList
+covidmanagementsystem.managementsystem.ManagerList$9
+covidmanagementsystem.managementsystem.ManagerList$8
+covidmanagementsystem.managementsystem.ManagerList$7
+covidmanagementsystem.managementsystem.ManagerList$6
+covidmanagementsystem.managementsystem.ManagerList$5
+covidmanagementsystem.managementsystem.ManagerList$4
+covidmanagementsystem.managementsystem.ManagerList$3
+covidmanagementsystem.managementsystem.ManagerList$2
+covidmanagementsystem.managementsystem.ManagerList$1
