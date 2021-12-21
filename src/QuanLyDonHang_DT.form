@@ -203,11 +203,11 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="18" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="M&#xe3; &#x111;&#x1a1;n h&#xe0;ng"/>
+                    <Property name="text" type="java.lang.String" value="T&#xec;nh tr&#x1ea1;ng &#x111;&#x1a1;n h&#xe0;ng"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="70" y="120" width="140" height="40"/>
+                      <AbsoluteConstraints x="60" y="170" width="190" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -222,7 +222,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="280" y="120" width="260" height="40"/>
+                      <AbsoluteConstraints x="280" y="80" width="260" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -236,6 +236,41 @@
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="210" y="0" width="200" height="40"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel8">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="18" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; &#x111;&#x1a1;n h&#xe0;ng"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="60" y="80" width="140" height="40"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="&#x110;ANG GIAO"/>
+                        <StringItem index="1" value="&#x110;&#xc3; GIAO"/>
+                        <StringItem index="2" value="&#x110;&#xc3; H&#x1ee6;Y"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="350" y="170" width="120" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -354,7 +389,7 @@
                             <Column editable="true" title="M&#xe3; t&#xe0;i x&#x1ebf;" type="java.lang.String"/>
                             <Column editable="true" title="T&#xea;n &#x111;&#x1a1;n h&#xe0;ng" type="java.lang.String"/>
                             <Column editable="true" title="T&#xec;nh tr&#x1ea1;ng &#x111;&#x1a1;n h&#xe0;ng" type="java.lang.String"/>
-                            <Column editable="true" title="Ph&#xed; v&#x1ead;n chuy&#x1ec3;n" type="java.lang.Float"/>
+                            <Column editable="true" title="Ph&#xed; v&#x1ead;n chuy&#x1ec3;n" type="java.lang.String"/>
                             <Column editable="true" title="&#x110;&#x1ecb;a ch&#x1ec9; giao" type="java.lang.String"/>
                             <Column editable="true" title="H&#xec;nh th&#x1ee9;c thanh to&#xe1;n" type="java.lang.String"/>
                           </Table>
