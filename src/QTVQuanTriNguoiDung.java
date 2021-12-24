@@ -1,3 +1,7 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /*
  *  Student's ID: 19127622
  *  Full name: Ngo Truong Tuyen
@@ -11,7 +15,13 @@
  * @author zerotus
  */
 public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
-
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    
+    
+    String userID;
+    String userType;
     /**
      * Creates new form ThongTinDoiTac
      */
@@ -282,7 +292,8 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
+        System.out.println(userID);
+        //txtSearchingUsername.setText(userID);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

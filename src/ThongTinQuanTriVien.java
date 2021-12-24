@@ -19,8 +19,9 @@ import java.util.logging.Logger;
  * @author zerotus
  */
 public class ThongTinQuanTriVien extends javax.swing.JFrame {
-    static String userID = "QTV0001";
-    static String userType = "";
+    String userID = "QTV0001";
+    String userType = "";
+    
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;

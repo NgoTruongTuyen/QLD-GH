@@ -1,5 +1,6 @@
-<<<<<<< HEAD
-
+/* 
+ *  Subject: Database Management Systems
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,36 +10,21 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-=======
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
-/*
- *  Student's ID: 19127622
- *  Full name: Ngo Truong Tuyen
- *  Subject: Java Programming
- *  Assignment :
- *  Problem :
- */
-
 /**
  *
  * @author zerotus
  */
 public class DangNhap extends javax.swing.JFrame {
-<<<<<<< HEAD
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     
     
-    static String userID = "";
-    static String userType = "";
-    
+    static String userID;
+    static String userType;
     private JFrame frame;
-=======
-    static String id = "";
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
     /**
-     * Creates new form DangNhap
+     * Creates new form Login
      */
     public DangNhap() {
         initComponents();
@@ -56,29 +42,25 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-<<<<<<< HEAD
-=======
-        txtPassword = new javax.swing.JPasswordField();
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
         jLabel3 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
-<<<<<<< HEAD
+        btnCancel = new javax.swing.JButton();
         txtPassword = new javax.swing.JTextField();
-=======
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Đăng nhập");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(51, 153, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Đăng nhập");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 70));
 
@@ -86,23 +68,15 @@ public class DangNhap extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Tên đăng nhập");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
-<<<<<<< HEAD
-=======
-        jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 210, 30));
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
+        jLabel2.setText("Mã tài khoản");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Mật khẩu");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
 
         txtUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-<<<<<<< HEAD
-        jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 210, 40));
-=======
-        jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 210, 30));
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
+        jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 260, 40));
 
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnLogin.setText("Đăng nhập");
@@ -113,42 +87,27 @@ public class DangNhap extends javax.swing.JFrame {
         });
         jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 170, 50));
 
-        btnExit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnExit.setText("Thoát");
-<<<<<<< HEAD
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnCancel.setText("Thoát");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
-        jPanel3.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 170, 50));
+        jPanel3.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 170, 50));
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 210, 40));
+        jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 260, 40));
 
-=======
-        jPanel3.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 170, 50));
-
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 600, 330));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-<<<<<<< HEAD
         try {
             conn = DBInfo.connect();
             pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ? AND MATKHAU = ?");
@@ -160,38 +119,44 @@ public class DangNhap extends javax.swing.JFrame {
                 userID = txtUsername.getText();
                 userType = rs.getString("LOAIND");
                 int type = Integer.parseInt(userType);
-                switch(type) {
-                    case 0:
-                        
-                        break;
-                    case 1:
-                      // code block
-                        break;
-                    default:
-                      // code block
-                 }
-                
+                int status = Integer.parseInt(rs.getString("TINHTRANG"));
+                if (status == 0) {
+                    frame = new JFrame("Thông báo");
+                    JOptionPane.showMessageDialog(frame, "Tài khoản của bạn đã bị khóa","Thông báo",JOptionPane.WARNING_MESSAGE);
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                } 
+                else {
+                    switch(type) {
+                        case 0:
+                            QTVQuanTriNguoiDung qtv = new QTVQuanTriNguoiDung();
+                            qtv.userID = userID;
+                            qtv.userType = userType;
+                            this.hide();
+                            qtv.setVisible(true);
+                            break;
+                        case 1:
+                          // code block
+                            break;
+                        default:
+                          // code block
+                    }
+                } 
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        frame = new JFrame("Exit");
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        frame = new JFrame("Thoát");
         if (JOptionPane.showConfirmDialog(frame, "Bạn chắc chắn muốn thoát?", "Hệ thống đặt và giao hàng online",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
             System.exit(0);
         }
-    }//GEN-LAST:event_btnExitActionPerformed
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-=======
-
-    }//GEN-LAST:event_btnLoginActionPerformed
-
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
     /**
      * @param args the command line arguments
      */
@@ -218,6 +183,7 @@ public class DangNhap extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -228,7 +194,7 @@ public class DangNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -236,11 +202,7 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-<<<<<<< HEAD
     private javax.swing.JTextField txtPassword;
-=======
-    private javax.swing.JPasswordField txtPassword;
->>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
