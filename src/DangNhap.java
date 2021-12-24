@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+=======
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
 /*
  *  Student's ID: 19127622
  *  Full name: Ngo Truong Tuyen
@@ -11,7 +24,19 @@
  * @author zerotus
  */
 public class DangNhap extends javax.swing.JFrame {
+<<<<<<< HEAD
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    
+    
+    static String userID = "";
+    static String userType = "";
+    
+    private JFrame frame;
+=======
     static String id = "";
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
     /**
      * Creates new form DangNhap
      */
@@ -31,11 +56,18 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+<<<<<<< HEAD
+=======
         txtPassword = new javax.swing.JPasswordField();
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
         jLabel3 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+<<<<<<< HEAD
+        txtPassword = new javax.swing.JTextField();
+=======
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,14 +88,21 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Tên đăng nhập");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+<<<<<<< HEAD
+=======
         jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 210, 30));
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Mật khẩu");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
 
         txtUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+<<<<<<< HEAD
+        jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 210, 40));
+=======
         jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 210, 30));
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
 
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnLogin.setText("Đăng nhập");
@@ -76,8 +115,21 @@ public class DangNhap extends javax.swing.JFrame {
 
         btnExit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnExit.setText("Thoát");
+<<<<<<< HEAD
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 170, 50));
 
+        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 210, 40));
+
+=======
+        jPanel3.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 170, 50));
+
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 600, 330));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,9 +148,50 @@ public class DangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+<<<<<<< HEAD
+        try {
+            conn = DBInfo.connect();
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ? AND MATKHAU = ?");
+            pstmt.setString(1, txtUsername.getText());
+            pstmt.setString(2, txtPassword.getText());
+            rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+                userID = txtUsername.getText();
+                userType = rs.getString("LOAIND");
+                int type = Integer.parseInt(userType);
+                switch(type) {
+                    case 0:
+                        
+                        break;
+                    case 1:
+                      // code block
+                        break;
+                    default:
+                      // code block
+                 }
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        frame = new JFrame("Exit");
+        if (JOptionPane.showConfirmDialog(frame, "Bạn chắc chắn muốn thoát?", "Hệ thống đặt và giao hàng online",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
+
+=======
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
     /**
      * @param args the command line arguments
      */
@@ -143,7 +236,11 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+<<<<<<< HEAD
+    private javax.swing.JTextField txtPassword;
+=======
     private javax.swing.JPasswordField txtPassword;
+>>>>>>> 3b4635c79b92d228f1c211596328cd4b8f0fce75
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
