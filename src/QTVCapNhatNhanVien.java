@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author zerotus
  */
-public class QTVCapNhatTaiXe extends javax.swing.JFrame {
+public class QTVCapNhatNhanVien extends javax.swing.JFrame {
     String userID;
     String userType;
     String currentUser;
@@ -28,9 +28,9 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     /**
-     * Creates new form QTVCapNhatTaiKhoanTaiXe
+     * Creates new form QTVCapNhatNhanVien
      */
-    public QTVCapNhatTaiXe() {
+    public QTVCapNhatNhanVien() {
         initComponents();
     }
 
@@ -52,32 +52,19 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         btnBackToHome = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        txtAccountNumber = new javax.swing.JTextField();
-        txtIDCard = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtLicensePlate = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        txtArea = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        comboStatus = new javax.swing.JComboBox<>();
-        jLabel17 = new javax.swing.JLabel();
-        txtAccountID = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        comboStatus = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        txtAccountID = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         btnViewProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -115,7 +102,7 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 210, 60));
+        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 210, 60));
 
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBack.setText("Quay lại");
@@ -124,7 +111,7 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 210, 60));
+        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -133,106 +120,60 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
                 btnBackToHomeActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 10, 210, 60));
+        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Biển số xe");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 190, 170, 40));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("Mật khẩu");
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 340, 140, 40));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Tên tài xế");
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 70, 140, 40));
+        jLabel8.setText("Mã tài khoản");
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 140, 40));
+
+        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 340, 310, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel13.setText("Thông tin chi tiết tài xế");
-        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 300, 40));
-
-        txtAccountNumber.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtAccountNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 250, 310, 40));
-
-        txtIDCard.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtIDCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 130, 310, 40));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("Email");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 490, 140, 40));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("CMND");
-        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 140, 40));
-
-        txtLicensePlate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtLicensePlate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 190, 310, 40));
-
-        txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, 310, 40));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Loại người dùng");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 170, 40));
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("3:  Tài xế");
-        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 140, 40));
-
-        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 490, 310, 40));
-
-        txtArea.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 310, 310, 40));
-
-        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 370, 310, 40));
-
-        txtPhone.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 430, 310, 40));
+        jLabel13.setText("Cập nhật tài khoản");
+        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 240, 40));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("Số điện thoại");
-        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 430, 140, 40));
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 140, 40));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel15.setText("Khu vực hoạt động");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 180, 40));
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel16.setText("Địa chỉ");
-        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 370, 200, 40));
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel18.setText("Tài khoản ngân hàng");
-        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, 200, 40));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Tình trạng");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, 140, 40));
 
         comboStatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Chọn loại tình trạng---", "0: Khóa", "1: Bình thường" }));
-        jPanel6.add(comboStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 310, 40));
+        jPanel6.add(comboStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, 310, 40));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel17.setText("Tình trạng");
-        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 140, 40));
+        jLabel3.setText("*Bỏ trống nếu không muốn đổi mật khẩu");
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, -1, -1));
 
         txtAccountID.setEditable(false);
         txtAccountID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtAccountID, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 310, 40));
+        jPanel6.add(txtAccountID, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 310, 40));
+
+        txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 310, 40));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("Họ tên");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 140, 40));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Mã tài khoản");
-        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 140, 40));
+        jLabel11.setText("Loại người dùng");
+        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 170, 40));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel12.setText("Mật khẩu");
-        jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 140, 40));
-
-        jLabel3.setText("*Bỏ trống nếu không muốn đổi mật khẩu");
-        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
-
-        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 310, 40));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setText("1: Quản trị viên");
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, 140, 40));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1520, 550));
 
@@ -276,19 +217,12 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
     public void loadData() {
         try {
             conn = DBInfo.connect();
-            //load data from QUANTRIVIEN table
-            pstmt = conn.prepareStatement("select * from TAIXE where MATX = ?");
+            //load data from NHANVIEN table
+            pstmt = conn.prepareStatement("select * from NHANVIEN where MANV = ?");
             pstmt.setString(1, currentUser);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                txtName.setText(rs.getString("TENTX"));
-                txtIDCard.setText(rs.getString("CMND"));
-                txtLicensePlate.setText("BIENSOXE");
-                txtAccountNumber.setText("THONGTINTKNH");
-                txtArea.setText("KHUVUCHD");
-                txtAddress.setText(rs.getString("DIACHI"));
-                txtPhone.setText(rs.getString("SDT"));
-                txtEmail.setText(rs.getString("EMAIL"));
+                txtName.setText(rs.getString("TENNV"));
             }
             
             //load data from TAIKHOAN table
@@ -300,32 +234,21 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
                 int status = Integer.parseInt(rs.getString("TINHTRANG"));
                 comboStatus.setSelectedIndex(status + 1);
             }
-            
-            //System.out.println(rs.getString("MATK"));
         } catch (SQLException ex) {
             Logger.getLogger(ThongTinQuanTriVien.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+        
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try {
             conn = DBInfo.connect();
-            //update data from QUANTRIVIEN table
-          pstmt = conn.prepareStatement("update TAIXE set TENTX = ?, CMND = ?, BIENSOXE = ?, THONGTINTKNH = ?,"
-                  + " KHUVUCHD = ? , DIACHI = ?, SDT = ?, EMAIL = ? where MATX = ?");
+            //load data from NHANVIEN table
+            pstmt = conn.prepareStatement("update NHANVIEN set TENNV = ? where MANV = ?");
             pstmt.setString(1, txtName.getText());
-            pstmt.setString(2, txtIDCard.getText());
-            pstmt.setString(3, txtLicensePlate.getText());
-            pstmt.setString(4, txtAccountNumber.getText());
-            pstmt.setString(5, txtArea.getText());
-            pstmt.setString(6, txtAddress.getText());
-            pstmt.setString(7, txtPhone.getText());
-            pstmt.setString(8, txtEmail.getText());
-            pstmt.setString(9, currentUser);
+            pstmt.setString(2, currentUser);
             pstmt.executeUpdate();
 
-            
-            //update data from TAIKHOAN table
+            //load data from TAIKHOAN table
             String password = new String(txtPassword.getPassword());
             int status = getStatus(comboStatus.getSelectedItem().toString());
             if (password.length() != 0) {
@@ -340,38 +263,50 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
             }
             pstmt.executeUpdate();
             
-            QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
-            admin.userID = userID;
-            admin.userType = userType;
-            admin.currentUser = currentUser;
+            
+            ThongTinNhanVien managerInfo = new ThongTinNhanVien();
+            managerInfo.userID = userID;
+            managerInfo.userType = userType;
+            managerInfo.currentUser = currentUser;
 
             this.hide();
-            admin.setVisible(true);
-            
+            managerInfo.loadData();
+            managerInfo.setVisible(true);
+
             JOptionPane.showMessageDialog(this, "Cập nhật thông tin thành công!");
-            //System.out.println(rs.getString("MATK"));
+
         } catch (SQLException ex) {
             Logger.getLogger(ThongTinQuanTriVien.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        ThongTinTaiXe DriverInfo = new ThongTinTaiXe();
-        DriverInfo.userID = userID;
-        DriverInfo.userType = userType;
-        DriverInfo.currentUser = currentUser;
+        ThongTinNhanVien managerInfo = new ThongTinNhanVien();
+        managerInfo.userID = userID;
+        managerInfo.userType = userType;
+        managerInfo.currentUser = currentUser;
 
         this.hide();
-        DriverInfo.loadData();
-        DriverInfo.setVisible(true);
+        managerInfo.loadData();
+        managerInfo.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
+        QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+        admin.userID = userID;
+        admin.userType = userType;
+        admin.currentUser = currentUser;
+        
+        this.hide();
+        admin.setVisible(true);
+    }//GEN-LAST:event_btnBackToHomeActionPerformed
 
     private void btnViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProfileActionPerformed
         ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
         adminInfo.userID = userID;
         adminInfo.userType = userType;
         adminInfo.currentUser = userID;
-
+        
         this.hide();
         adminInfo.loadData();
         adminInfo.setVisible(true);
@@ -382,16 +317,6 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
         this.hide();
         login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
-        QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
-        admin.userID = userID;
-        admin.userType = userType;
-        admin.currentUser = currentUser;
-
-        this.hide();
-        admin.setVisible(true);
-    }//GEN-LAST:event_btnBackToHomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -410,21 +335,20 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QTVCapNhatTaiXe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QTVCapNhatNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QTVCapNhatTaiXe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QTVCapNhatNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QTVCapNhatTaiXe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QTVCapNhatNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QTVCapNhatTaiXe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QTVCapNhatNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QTVCapNhatTaiXe().setVisible(true);
+                new QTVCapNhatNhanVien().setVisible(true);
             }
         });
     }
@@ -439,16 +363,10 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -460,14 +378,7 @@ public class QTVCapNhatTaiXe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField txtAccountID;
-    private javax.swing.JTextField txtAccountNumber;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtArea;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtIDCard;
-    private javax.swing.JTextField txtLicensePlate;
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

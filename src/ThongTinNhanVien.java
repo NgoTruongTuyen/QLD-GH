@@ -2,29 +2,27 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-/*
- *  Student's ID: 19127622
- *  Full name: Ngo Truong Tuyen
- *  Subject: Java Programming
- *  Assignment :
- *  Problem :
- */
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author zerotus
  */
-public class ThongTinTaiXe extends javax.swing.JFrame {
-    static String userID = "";
-    static String userType = "";
+public class ThongTinNhanVien extends javax.swing.JFrame {
+    String userID;
+    String userType;
+    String currentUser;
+    
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     /**
-     * Creates new form ThongTinTaiXe
+     * Creates new form ThongTinNhanVien
      */
-    public ThongTinTaiXe() {
+    public ThongTinNhanVien() {
         initComponents();
     }
 
@@ -42,33 +40,20 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        btnEdit = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         btnBackToHome = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtAccountNumber = new javax.swing.JTextField();
-        txtIDCard = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtLicensePlate = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
-        txtUsername = new javax.swing.JTextField();
         txtStatus = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        txtArea = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         txtUserType = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtAccountID = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         btnViewProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -99,23 +84,14 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
 
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEdit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnEdit.setText("Sửa");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnUpdate.setText("Sửa");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
-        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 210, 60));
-
-        btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnBack.setText("Quay lại");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 210, 60));
+        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -124,7 +100,25 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
                 btnBackToHomeActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 10, 210, 60));
+        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 10, 210, 60));
+
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 210, 60));
+
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnBack.setText("Quay lại");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -132,96 +126,40 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Biển số xe");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 190, 170, 40));
+        jLabel4.setText("Loại người dùng");
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 170, 40));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Tên tài xế");
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 70, 140, 40));
+        jLabel8.setText("Họ tên");
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 140, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel13.setText("Thông tin chi tiết");
         jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 210, 40));
 
-        txtAccountNumber.setEditable(false);
-        txtAccountNumber.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtAccountNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 250, 310, 40));
-
-        txtIDCard.setEditable(false);
-        txtIDCard.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtIDCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 130, 310, 40));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("Email");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 490, 140, 40));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("CMND");
-        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 140, 40));
-
-        txtLicensePlate.setEditable(false);
-        txtLicensePlate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtLicensePlate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 190, 310, 40));
-
-        txtName.setEditable(false);
-        txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, 310, 40));
-
-        txtUsername.setEditable(false);
-        txtUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 310, 40));
-
         txtStatus.setEditable(false);
         txtStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 310, 40));
+        jPanel6.add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 310, 40));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Loại người dùng");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 170, 40));
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("Tình trạng");
-        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 140, 40));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Tên đăng nhập");
-        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 140, 40));
-
-        txtEmail.setEditable(false);
-        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 490, 310, 40));
-
-        txtArea.setEditable(false);
-        txtArea.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 310, 310, 40));
-
-        txtAddress.setEditable(false);
-        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 370, 310, 40));
-
-        txtPhone.setEditable(false);
-        txtPhone.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 430, 310, 40));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("Số điện thoại");
-        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 430, 140, 40));
-
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel15.setText("Khu vực hoạt động");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 180, 40));
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel16.setText("Địa chỉ");
-        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 370, 200, 40));
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel18.setText("Tài khoản ngân hàng");
-        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, 200, 40));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Tình trạng");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 140, 40));
 
         txtUserType.setEditable(false);
         txtUserType.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtUserType, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 310, 40));
+        jPanel6.add(txtUserType, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, 310, 40));
+
+        txtName.setEditable(false);
+        txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 310, 40));
+
+        txtAccountID.setEditable(false);
+        txtAccountID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtAccountID, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 310, 40));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setText("Mã tài khoản");
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 140, 40));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1520, 550));
 
@@ -258,25 +196,116 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+    public void loadData() {
+        try {
+            conn = DBInfo.connect();
+            //load data from QUANTRIVIEN table
+            pstmt = conn.prepareStatement("select * from NHANVIEN where MANV = ?");
+            pstmt.setString(1, currentUser);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                txtName.setText(rs.getString("TENNV"));
+            }
+            
+            //load data from TAIKHOAN table
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ?");
+            pstmt.setString(1, currentUser);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                txtAccountID.setText(currentUser);
+                txtUserType.setText("Nhân viên");
+                int status = Integer.parseInt(rs.getString("TINHTRANG"));
+                
+                if (status == 0) {
+                    txtStatus.setText("Bị khóa");
+                } else {
+                    txtStatus.setText("Bình thường");
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongTinQuanTriVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        QTVCapNhatNhanVien adminUpdateManager = new QTVCapNhatNhanVien();
+        adminUpdateManager.userID = userID;
+        adminUpdateManager.userType = userType;
+        adminUpdateManager.currentUser = currentUser;
+        this.hide();
+        
+        adminUpdateManager.loadData();
+        adminUpdateManager.setVisible(true);
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
-    }//GEN-LAST:event_btnEditActionPerformed
+    private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
+	QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+        admin.userID = userID;
+        admin.userType = userType;
+        admin.currentUser = currentUser;
+        
+        this.hide();
+        admin.setVisible(true);
+    }//GEN-LAST:event_btnBackToHomeActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        try {
+            int deleteItem = JOptionPane.showConfirmDialog(null,"Bạn chắc chắn muốn xóa?",
+                    "Xóa tài khoản", JOptionPane.YES_NO_OPTION);
+            if (deleteItem ==  JOptionPane.YES_OPTION) {
+                conn = DBInfo.connect();
+                //load data from QUANTRIVIEN table
+                pstmt = conn.prepareStatement("delete NHANVIEN where MANV = ?");
+                pstmt.setString(1, userID);
+                pstmt.executeUpdate();
+
+                //load data from TAIKHOAN table
+                pstmt = conn.prepareStatement("delete TAIKHOAN where MATK = ?");
+                pstmt.setString(1, userID);
+                pstmt.executeUpdate();
+            }
+            
+            JOptionPane.showMessageDialog(this, "Xóa thành công!");
+            
+            QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+            admin.userID = userID;
+            admin.userType = userType;
+            admin.currentUser = currentUser;
+
+            this.hide();
+            admin.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongTinQuanTriVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+        admin.userID = userID;
+        admin.userType = userType;
+        admin.currentUser = currentUser;
+        
+        this.hide();
+        admin.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProfileActionPerformed
-        // TODO add your handling code here:
+        ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
+        adminInfo.userID = userID;
+        adminInfo.userType = userType;
+        adminInfo.currentUser = userID;
+        
+        this.hide();
+        adminInfo.loadData();
+        adminInfo.setVisible(true);
     }//GEN-LAST:event_btnViewProfileActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        DangNhap login = new DangNhap();
+        this.hide();
+        login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackToHomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,20 +324,20 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThongTinTaiXe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThongTinNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThongTinTaiXe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThongTinNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThongTinTaiXe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThongTinNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThongTinTaiXe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThongTinNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThongTinTaiXe().setVisible(true);
+                new ThongTinNhanVien().setVisible(true);
             }
         });
     }
@@ -316,22 +345,16 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBackToHome;
-    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnViewProfile;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -339,16 +362,9 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField txtAccountNumber;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtArea;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtIDCard;
-    private javax.swing.JTextField txtLicensePlate;
+    private javax.swing.JTextField txtAccountID;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtUserType;
-    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

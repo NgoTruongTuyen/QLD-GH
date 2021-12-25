@@ -22,12 +22,17 @@ public class DangNhap extends javax.swing.JFrame {
     
     static String userID;
     static String userType;
+    static String currentUser;
+    
     private JFrame frame;
     /**
      * Creates new form Login
      */
     public DangNhap() {
         initComponents();
+        userID = "";
+        userType = "";
+        currentUser = "";
     }
 
     /**
@@ -46,7 +51,7 @@ public class DangNhap extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        txtPassword = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -112,7 +117,7 @@ public class DangNhap extends javax.swing.JFrame {
             conn = DBInfo.connect();
             pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ? AND MATKHAU = ?");
             pstmt.setString(1, txtUsername.getText());
-            pstmt.setString(2, txtPassword.getText());
+            pstmt.setString(2, new String(txtPassword.getPassword()));
             rs = pstmt.executeQuery();
             
             if (rs.next()) {
@@ -120,6 +125,7 @@ public class DangNhap extends javax.swing.JFrame {
                 userType = rs.getString("LOAIND");
                 int type = Integer.parseInt(userType);
                 int status = Integer.parseInt(rs.getString("TINHTRANG"));
+                
                 if (status == 0) {
                     frame = new JFrame("Thông báo");
                     JOptionPane.showMessageDialog(frame, "Tài khoản của bạn đã bị khóa","Thông báo",JOptionPane.WARNING_MESSAGE);
@@ -129,11 +135,13 @@ public class DangNhap extends javax.swing.JFrame {
                 else {
                     switch(type) {
                         case 0:
-                            QTVQuanTriNguoiDung qtv = new QTVQuanTriNguoiDung();
-                            qtv.userID = userID;
-                            qtv.userType = userType;
+                            QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+                            admin.userID = userID;
+                            admin.userType = userType;
+                            admin.currentUser = userID;
+                            
                             this.hide();
-                            qtv.setVisible(true);
+                            admin.setVisible(true);
                             break;
                         case 1:
                           // code block
@@ -142,6 +150,11 @@ public class DangNhap extends javax.swing.JFrame {
                           // code block
                     }
                 } 
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Sai mật khẩu!");
+                txtUsername.setText("");
+                txtPassword.setText("");
             }
 
         } catch (SQLException ex) {
@@ -202,7 +215,7 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
