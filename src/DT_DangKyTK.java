@@ -20,12 +20,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author zerotus
  */
-public class DT_DangKyTK1 extends javax.swing.JFrame {
+public class DT_DangKyTK extends javax.swing.JFrame {
     Connection connection;
     /**
      * Creates new form ManagerList
      */
-    public DT_DangKyTK1() {
+    public DT_DangKyTK() {
         initComponents();
     }
     public String getMaDT(){
@@ -238,9 +238,7 @@ public class DT_DangKyTK1 extends javax.swing.JFrame {
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
-        
         String MaDT = getMaDT();
-        
        String Password = "123";
        String sqlTK = "INSERT INTO TAIKHOAN (MATK,MAtKHAU,LOAIND,TINHTRANG) VALUES(?,?,?,?)";
         try {
@@ -262,6 +260,12 @@ public class DT_DangKyTK1 extends javax.swing.JFrame {
                String SDT  = txtPhonenumber.getText();
                String SoCN = txtBranchQuantity.getText();
                String Email= txtMail.getText();
+               //MaST.equals(ABORT)""||tenDT==""||NguoiDD==""||SLDHMN==""||LHVC==""||DCKD==""||SDT==""||SoCN==""||Email==""
+               if(tenDT.isEmpty()||tenDT.isEmpty()||NguoiDD.isEmpty()||SLDHMN.isEmpty()||LHVC.isEmpty()||DCKD.isEmpty()||SDT.isEmpty()
+                       ||SoCN.isEmpty()||Email.isEmpty()){
+                   JOptionPane.showMessageDialog(null,"Các dòng không được bỏ trống");
+                   return;
+               }
                String sql = "INSERT INTO DOITAC(MADT,MAST,TENDT,NGUOIDAIDIEN,SOCN,SOLUONGDH,LOAIHANGVC,DIACHIKD,SDT,EMAIL) VALUES(?,?,?,?,?,?,?,?,?,?)";
                try {
                     PreparedStatement pst = connection.prepareStatement(sql);
@@ -298,6 +302,10 @@ public class DT_DangKyTK1 extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        dispose();
+        DangKy DK = new DangKy();
+        DK.setVisible(true);
+        
     }//GEN-LAST:event_btnBackActionPerformed
 
     /**
@@ -317,14 +325,22 @@ public class DT_DangKyTK1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DT_DangKyTK1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DT_DangKyTK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DT_DangKyTK1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DT_DangKyTK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DT_DangKyTK1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DT_DangKyTK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DT_DangKyTK1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DT_DangKyTK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -337,7 +353,7 @@ public class DT_DangKyTK1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DT_DangKyTK1().setVisible(true);
+                new DT_DangKyTK().setVisible(true);
             }
         });
     }

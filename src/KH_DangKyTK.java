@@ -60,6 +60,8 @@ public class KH_DangKyTK extends javax.swing.JFrame {
         txtMail = new javax.swing.JTextField();
         txtPhoneNumber = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtCMND = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,7 +87,7 @@ public class KH_DangKyTK extends javax.swing.JFrame {
                 btnSignInActionPerformed(evt);
             }
         });
-        jPanel8.add(btnSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 210, 60));
+        jPanel8.add(btnSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 210, 60));
 
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBack.setText("Quay lại");
@@ -94,7 +96,7 @@ public class KH_DangKyTK extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 0, 210, 60));
+        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 0, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -115,8 +117,8 @@ public class KH_DangKyTK extends javax.swing.JFrame {
         jPanel6.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 420, 40));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("Email");
-        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 140, 40));
+        jLabel9.setText("CMND");
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 140, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Địa chỉ");
@@ -130,6 +132,13 @@ public class KH_DangKyTK extends javax.swing.JFrame {
 
         txtAddress.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel6.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 420, 40));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("Email");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 140, 40));
+
+        txtCMND.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtCMND, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 420, 40));
 
         jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 950, 470));
 
@@ -168,16 +177,21 @@ public class KH_DangKyTK extends javax.swing.JFrame {
        String address = txtAddress.getText();
        String phoneNumber = txtPhoneNumber.getText();
        String email = txtMail.getText();
-       String sql ="INSERT INTO KHACHHANG (MAKH,TENKH,SDT,DIACHI,EMAIL) VALUES(?,?,?,?,?)";
-       
+       String CMND = txtCMND.getText();
+       String sql ="INSERT INTO KHACHHANG (MAKH,TENKH,CMND,SDT,DIACHI,EMAIL) VALUES(?,?,?,?,?,?)";
+       if(address.isEmpty()||phoneNumber.isEmpty()||email.isEmpty()){
+           JOptionPane.showMessageDialog(null, "Các dòng không được để trống");
+           return;
+       }
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, CusID);
             ps.setString(2, "N'"+name+"'");
-            ps.setString(3, phoneNumber);
-            ps.setString(4, address);
-            ps.setString(5, email);
+            ps.setString(3, CMND);
+            ps.setString(4, phoneNumber);
+            ps.setString(5, address);
+            ps.setString(6, email);
             ps.executeUpdate();
             // String 
             JOptionPane.showMessageDialog(null, "Đăng ký thành công\n"
@@ -190,6 +204,9 @@ public class KH_DangKyTK extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        dispose();
+        DangKy DK = new DangKy();
+        DK.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     /**
@@ -232,6 +249,7 @@ public class KH_DangKyTK extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSignIn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -243,6 +261,7 @@ public class KH_DangKyTK extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtCMND;
     private javax.swing.JTextField txtMail;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhoneNumber;
