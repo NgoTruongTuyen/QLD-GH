@@ -168,7 +168,7 @@ public class DangNhap extends javax.swing.JFrame {
                             break;   
                         case 3:
                           // code block
-                           // DT_DashBoard  DT = new DT_DashBoard();
+                          //  DT_DashBoard1  DT = new DT_DashBoard1();
                             this.hide();
                             
                           //  DT.setVisible(true);

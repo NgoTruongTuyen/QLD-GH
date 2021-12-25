@@ -63,22 +63,21 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         DefaultTableModel tableModel = (DefaultTableModel) TableSanPham.getModel();
        tableModel.setRowCount(0);
        tableModel.setColumnCount(0);
-       tableModel.setColumnIdentifiers(new Object[]{"Mã sản phẩm","Tên sản phẩm",
+       tableModel.setColumnIdentifiers(new Object[]{"Mã sản phẩm","Mã chi nhánh","Tên sản phẩm",
                         "Giá","Mã đối tác","Số lượng tồn"});
         try {
-          
-                    
             Statement statement = connection.createStatement();
             ResultSet rs1 = statement.executeQuery(sql1);
             while (rs1.next()) {
                 String MASP = rs1.getString("MASP");
                 savedProID = MASP;
                 String TENSP = rs1.getString("TENSP");
+                String MACN = rs1.getString("MACN");
                 String GIA = rs1.getString("GIA");
                 String MaDT = rs1.getString("MADT");
                 String SL= rs1.getString("SOLUONGTON");
                 
-                String tData[] = { MASP, TENSP, GIA,MaDT,SL};
+                String tData[] = { MASP,MACN, TENSP, GIA,MaDT,SL};
                 //      DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
                 
                 tableModel.addRow(tData);
@@ -307,16 +306,16 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
 
         TableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Chi nhánh", "Số lượng", "Thành tiền"
+                "Mã sản phẩm", "Tên sản phẩm", "Chi nhánh", "Số lượng", "Thành tiền", "Giá"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
