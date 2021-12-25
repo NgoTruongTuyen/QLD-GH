@@ -169,11 +169,18 @@ public class DangNhap extends javax.swing.JFrame {
                         case 3:
                           // code block
                           //  DT_DashBoard1  DT = new DT_DashBoard1();
-                            this.hide();
+                            TXXuLyDonHang driver = new TXXuLyDonHang();
+                            driver.userID = userID;
+                            driver.userType = userType;
+                            driver.currentUser = userID;
                             
+                            this.hide();
+                            driver.loadData();
+                            driver.setVisible(true);
+                            break;
                           //  DT.setVisible(true);
                             
-                            break;
+                           
                         case 4:
                           // code block
                             //
