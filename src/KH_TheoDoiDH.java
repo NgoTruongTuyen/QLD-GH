@@ -31,7 +31,7 @@ public class KH_TheoDoiDH extends javax.swing.JFrame {
        
         String MADH,TongTien,PhiVC,TinhTrangDH,HinhThucTT,DiaChiNhanHang,SDT,DIACHI;
         MADH = KH_DanhSachDH.savedID;
-        
+    //    JOptionPane.showMessageDialog(null, MADH);
         String sql = "SELECT * FROM DONHANG,KHACHHANG WHERE DONHANG.MAKH='"+MAKH+"' AND DONHANG.MAKH= KHACHHANG.MAKH AND MADH='"+savedDH+"'";
         try {
             Statement st = connection.createStatement();
