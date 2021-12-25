@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -16,29 +17,30 @@ import javax.swing.table.DefaultTableModel;
  */
 public class KH_TheoDoiDH extends javax.swing.JFrame {
     Connection connection;
-    
+    String savedDH;
     /**
      * Creates new form TheoDoiDonHang
      */
     public KH_TheoDoiDH() {
         initComponents();
-        loadDH("KH0001");
+        savedDH=KH_DanhSachDH.savedID;
+        loadDH(DangNhap.userID);
     }
     public void loadDH(String MAKH){
         connection = DBInfo.connect();
        
         String MADH,TongTien,PhiVC,TinhTrangDH,HinhThucTT,DiaChiNhanHang,SDT,DIACHI;
-        MADH="";
-        String sql = "SELECT * FROM DONHANG,KHACHHANG WHERE DONHANG.MAKH='"+MAKH+"' AND DONHANG.MAKH= KHACHHANG.MAKH ";
+        MADH = KH_DanhSachDH.savedID;
+        
+        String sql = "SELECT * FROM DONHANG,KHACHHANG WHERE DONHANG.MAKH='"+MAKH+"' AND DONHANG.MAKH= KHACHHANG.MAKH AND MADH='"+savedDH+"'";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             rs.next();
-            MADH = rs.getString("MADH");
            // TongTien = rs.getString();
             PhiVC = "29000";
             TinhTrangDH = rs.getString("TINHTRANGDH");
-            if(TinhTrangDH=="0"){
+            if(Integer.parseInt(TinhTrangDH)==0){
                 btnXacNhan.setEnabled(true);
             }
             else {
@@ -47,8 +49,8 @@ public class KH_TheoDoiDH extends javax.swing.JFrame {
             HinhThucTT = rs.getString("HINHTHUCTT");
             DiaChiNhanHang = rs.getString("DIACHIGIAO");
             lblMaDH.setText(MADH);
-            lblTongTienHang.setText("50000");
-            lblPhiVC.setText("29000");
+            
+            lblPhiVC.setText(PhiVC);
             if(Integer.parseInt(TinhTrangDH)==0){
                 lblTTDH.setText("Đang giao");
             }
@@ -82,6 +84,9 @@ public class KH_TheoDoiDH extends javax.swing.JFrame {
                 String MASP = rs.getString("MASP");
                 String SL = rs.getString("SOLUONG");
                 String GIA = rs.getString("GIA");
+                String TongTienHang = (Integer.parseInt(SL)*Integer.parseInt(GIA))+"";
+                lblTongTienHang.setText(TongTienHang);
+                lblTongTT.setText((Integer.parseInt(TongTienHang)+29000)+"");
                 String tData[] = {TenSP,MASP,SL,GIA};
                 tableModel.setColumnIdentifiers(new Object[]{"Tên sản phẩm","Mã sản phẩm","Số lượng","Đơn giá"});
                 tableModel.addRow(tData);
@@ -154,7 +159,7 @@ public class KH_TheoDoiDH extends javax.swing.JFrame {
         txtTinhTrangDonHang7 = new javax.swing.JTextField();
         txtPhiVanChuyen7 = new javax.swing.JTextField();
         txtTongTienHang7 = new javax.swing.JTextField();
-        jLabel64 = new javax.swing.JLabel();
+        lblTongTT = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
         lblMaDH = new javax.swing.JLabel();
         lblTongTienHang = new javax.swing.JLabel();
@@ -380,9 +385,9 @@ public class KH_TheoDoiDH extends javax.swing.JFrame {
 
         jPanel10.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 870, 230));
 
-        jLabel64.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel64.setText("0 đ");
-        jPanel10.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 160, 30));
+        lblTongTT.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lblTongTT.setText("0 đ");
+        jPanel10.add(lblTongTT, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 160, 30));
 
         jLabel65.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel65.setText("Mã đơn hàng:");
@@ -485,14 +490,22 @@ public class KH_TheoDoiDH extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        KH_DanhSachDH KH = new KH_DanhSachDH();
+        dispose();
+        KH.setVisible(true);
+        
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         try {
             // TODO add your handling code here:
-            String sql ="UPDATE DONHANG SET TINHTRANGDH = '1' WHERE MAKH='KH0001'";
+            String sql ="UPDATE DONHANG SET TINHTRANGDH = '1' WHERE MAKH='"+DangNhap.userID+"'";
             Statement st = connection.createStatement();
             st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Xác nhận thành công");
+            dispose();
+            KH_DanhSachDH KH = new KH_DanhSachDH();
+            KH.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(KH_TheoDoiDH.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -567,7 +580,6 @@ public class KH_TheoDoiDH extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel7;
@@ -592,6 +604,7 @@ public class KH_TheoDoiDH extends javax.swing.JFrame {
     private javax.swing.JLabel lblPhiVC;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTTDH;
+    private javax.swing.JLabel lblTongTT;
     private javax.swing.JLabel lblTongTienHang;
     private javax.swing.JTextField txtHinhThucThanhToan5;
     private javax.swing.JTextField txtHinhThucThanhToan6;

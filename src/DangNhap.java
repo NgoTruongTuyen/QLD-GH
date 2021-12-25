@@ -145,7 +145,34 @@ public class DangNhap extends javax.swing.JFrame {
                             break;
                         case 1:
                           // code block
+                            NV_XemVaDuyetHD NV = new NV_XemVaDuyetHD();
+                            this.hide();
+                            NV.setVisible(true);
                             break;
+                        case 2:
+                          // code block
+                            DT_DashBoard1  DT = new DT_DashBoard1();
+                            this.hide();
+                            DT.setVisible(true);
+                            
+                            break;   
+                        case 3:
+                          // code block
+                           // DT_DashBoard  DT = new DT_DashBoard();
+                            this.hide();
+                            
+                          //  DT.setVisible(true);
+                            
+                            break;
+                        case 4:
+                          // code block
+                            //
+                            
+                         //   DT.setVisible(true);
+                            KH_DashBoard KH = new KH_DashBoard();
+                            this.hide();
+                            KH.setVisible(true);
+                            break;      
                         default:
                           // code block
                     }

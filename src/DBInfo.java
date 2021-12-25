@@ -17,7 +17,7 @@ public class DBInfo {
     public static String driverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static String dbURL = "jdbc:sqlserver://localhost:1433;databaseName=QLDH";
     public static String dbUser = "sa";
-    public static String dbPass = "sahcmus";
+    public static String dbPass = "password";
     
     public static Connection connect() {
         Connection conn = null;

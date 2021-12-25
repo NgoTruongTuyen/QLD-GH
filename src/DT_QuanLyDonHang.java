@@ -22,13 +22,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DT_QuanLyDonHang extends javax.swing.JFrame {
     Connection connection;
+    
     /**
      * Creates new form ManagerList
      */
     public DT_QuanLyDonHang() {
         initComponents();
-        String sql ="SELECT * FROM DONHANG";
+        String sql ="SELECT * FROM DONHANG WHERE MADT='"+DangNhap.userID+"'";
         table_load(sql);
+        
     }
     void table_load(String sql){
        // Statement statement = null;
@@ -47,6 +49,15 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
                 String MATX = rs.getString("MATX");
                 String TENDH = rs.getString("TENDH");
                 String TINHTRANGDH = rs.getString("TINHTRANGDH");
+                if(Integer.parseInt(TINHTRANGDH)==0){
+                    TINHTRANGDH = "ĐANG GIAO";
+                }
+                else if(Integer.parseInt(TINHTRANGDH)==-1){
+                    TINHTRANGDH = "ĐÃ HỦY";
+                }
+                else if(Integer.parseInt(TINHTRANGDH)==1){
+                    TINHTRANGDH = "ĐÃ GIAO";
+                }
                 String PHIVC = rs.getString("PHIVANCHUYEN");
                 String DIACHIGIAO = rs.getString("DIACHIGIAO");
                 String HINHTHUCTT = rs.getString("HINHTHUCTT");
@@ -65,7 +76,9 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
     }
     public boolean isExistOrder(String OrderID){
        // connection=DBInfo.connect();
-        String sql_check="SELECT * FROM DONHANG WHERE MADH = '" + OrderID + "' ";
+       //
+       String sql ="SELECT * FROM DONHANG WHERE MADT='"+DangNhap.userID+"' AND MADH='"+OrderID+"'";
+       // String sql_check="SELECT * FROM DONHANG WHERE MADH = '" + OrderID + "' ";
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
@@ -74,7 +87,7 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
         }
         ResultSet rs = null;
         try {
-            rs = stmt.executeQuery(sql_check);
+            rs = stmt.executeQuery(sql);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,  e);
             e.printStackTrace();
@@ -284,7 +297,8 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,  "Đơn hàng không tồn tại");
             return;
         }
-        String sql = "SELECT * FROM DONHANG WHERE MADH = '"+OrderID+"'";  
+       // String sql = "SELECT * FROM DONHANG WHERE MADH = '"+OrderID+"'";  
+       String sql ="SELECT * FROM DONHANG WHERE MADH = '"+OrderID+"' AND MADT='"+DangNhap.userID+"'";
         table_load(sql);
         
        // String contractID_Search =  txtSear
@@ -293,12 +307,15 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
 
     private void btnSeeAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeAllActionPerformed
         // TODO add your handling code here:
-        String sql ="SELECT * FROM DONHANG";
+        String sql ="SELECT * FROM DONHANG WHERE MADT='"+DangNhap.userID+"'";
         table_load(sql);
     }//GEN-LAST:event_btnSeeAllActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        dispose();
+        DT_DashBoard1 dt = new DT_DashBoard1();
+        dt.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtOrdertIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrdertIDActionPerformed
@@ -309,6 +326,14 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         connection = DBInfo.connect();
         String condition = jComboBox1.getSelectedItem().toString();
+        int cond = -1;
+        System.out.println(condition);
+        if(condition.equals("ĐANG GIAO")){
+            cond = 0;
+        }
+        else if(condition.equals("ĐÃ GIAO")){
+            cond = 1;
+        }
         String OrderID = txtOrdertID.getText();
         if(isExistOrder(OrderID)==false){
             JOptionPane.showMessageDialog(null,  "Đơn hàng không tồn tại");
@@ -318,12 +343,14 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
        String sql ="UPDATE DONHANG SET TINHTRANGDH = ? WHERE MADH=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, condition);
+            ps.setString(1, cond+"");
             ps.setString(2,OrderID);
             ps.executeUpdate();
-            String sql1= "SELECT * FROM DONHANG";
+            JOptionPane.showMessageDialog(null, "Cập nhập tình trạng đơn hàng thành công");
+            String sql1 ="SELECT * FROM DONHANG WHERE MADT='"+DangNhap.userID+"'";
             table_load(sql1);
             connection.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(DT_QuanLyDonHang.class.getName()).log(Level.SEVERE, null, ex);
         }

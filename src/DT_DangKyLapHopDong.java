@@ -214,6 +214,9 @@ public class DT_DangKyLapHopDong extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        DT_DashBoard1 DTDB = new DT_DashBoard1();
+        dispose();
+        DTDB.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     /**

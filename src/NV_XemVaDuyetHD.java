@@ -200,6 +200,7 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -349,7 +350,7 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
                 btnSearchActionPerformed(evt);
             }
         });
-        jPanel7.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 150, 50));
+        jPanel7.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 150, 50));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("Xem danh sách hợp đồng");
@@ -391,6 +392,15 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 880, 530));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1520, 560));
+
+        btnExit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnExit.setText("Thoát");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 100, 130, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 780));
 
@@ -516,6 +526,13 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPartnerIDActionPerformed
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        DangNhap login = new DangNhap();
+        this.hide();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -558,6 +575,7 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
     private javax.swing.JButton btnApprove;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnConsiderList;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnRefuse;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSelectAll;

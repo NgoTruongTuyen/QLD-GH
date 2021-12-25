@@ -21,6 +21,7 @@ public class KH_DangHangPage2 extends javax.swing.JFrame {
     String StrsumPro;
     String StrshippingFee;
     String StrAllFree;
+    String PartnerID;
     /**
      * Creates new form DatHang_page2
      */
@@ -29,6 +30,7 @@ public class KH_DangHangPage2 extends javax.swing.JFrame {
         StrsumPro="0";
         StrshippingFee="29000";
         StrAllFree="0";
+        PartnerID="";
         initComponents();
         table_load();       
     }
@@ -380,19 +382,20 @@ public class KH_DangHangPage2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Không thể tạo đơn hàng vì không có sản phẩm nào trong đơn hàng tạm thời" );
              return ;
         }
-          String sql ="INSERT INTO DONHANG (MADH,MAKH,MATX,TENDH,TINHTRANGDH,PHIVANCHUYEN,DIACHIGIAO,HINHTHUCTT)"
-                    + " VALUES(?,?,?,?,?,?,?,?)";
+          String sql ="INSERT INTO DONHANG (MADH,MAKH,MATX,TENDH,TINHTRANGDH,PHIVANCHUYEN,DIACHIGIAO,HINHTHUCTT,MADT)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?)";
             
             try {
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setString(1, OrderID);
-                ps.setString(2, "KH0002");
+                ps.setString(2, DangNhap.userID);
                 ps.setString(3, "TX0001");
                 ps.setString(4, "Đơn hàng của "+name);
-                ps.setString(5, "1");
+                ps.setString(5, "0");
                 ps.setString(6,StrshippingFee);
                 ps.setString(7, address);
                 ps.setString(8, HTTT);
+                ps.setString(9, PartnerID);
                 ps.executeUpdate();
                 
             } catch (SQLException ex) {
@@ -411,6 +414,9 @@ public class KH_DangHangPage2 extends javax.swing.JFrame {
                // ps.setString(4, );
                ps.executeUpdate();
                JOptionPane.showMessageDialog(null, "Đặt hàng thành công");
+               KH_TheoDoiDH KH = new KH_TheoDoiDH();
+                dispose();
+               KH.setVisible(true);
               
             } catch (SQLException ex) {
                 Logger.getLogger(KH_DangHangPage2.class.getName()).log(Level.SEVERE, null, ex);

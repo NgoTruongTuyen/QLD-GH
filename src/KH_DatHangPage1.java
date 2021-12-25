@@ -19,6 +19,7 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
     static Vector<Vector<String>> savedPro;
     String savedPartnerID;
     String savedProID;
+    String savedDT;
     /**
      * Creates new form DatHang_page1
      */
@@ -26,6 +27,7 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
        savedPro = new Vector<Vector<String>>();
        savedPartnerID="";
         savedProID="";
+        savedDT="";
         initComponents(); 
         String sql ="SELECT * FROM DOITAC";
         table_load(sql);
@@ -464,6 +466,7 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         KH_DangHangPage2 dh = new KH_DangHangPage2();
         //dh.savedPro = savedPro;
         dh.savedDT = savedPartnerID;
+        dh.savedDT = savedPartnerID;
         dispose();
         dh.setVisible(true);
     }//GEN-LAST:event_btnDonHangActionPerformed
@@ -472,6 +475,7 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String PartnerID = txtSearchDTBar.getText();
         if(isExistPartner(PartnerID)){
+            savedPartnerID= PartnerID;
             String sql ="SELECT * FROM DOITAC WHERE MADT = '"+PartnerID+"'";
             table_load(sql);
         }
