@@ -1,23 +1,20 @@
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/*
- *  Student's ID: 19127622
- *  Full name: Ngo Truong Tuyen
- *  Subject: Java Programming
- *  Assignment :
- *  Problem :
- */
 
 /**
  *
  * @author zerotus
  */
 public class ThongTinDoiTac extends javax.swing.JFrame {
-    static String userID = "";
-    static String userType = "";
+    String userID;
+    String userType;
+    String currentUser;
+    
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -43,7 +40,6 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         btnEdit = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         btnBackToHome = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -55,11 +51,8 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtTaxID = new javax.swing.JTextField();
         txtCompanyName = new javax.swing.JTextField();
-        txtUsername = new javax.swing.JTextField();
         txtStatus = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtNumOfPackage = new javax.swing.JTextField();
         txtTypeOfPackage = new javax.swing.JTextField();
@@ -70,7 +63,10 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        txtUserType = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtAccountID = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         btnViewProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -108,16 +104,7 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
                 btnEditActionPerformed(evt);
             }
         });
-        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 210, 60));
-
-        btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnBack.setText("Quay lại");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 210, 60));
+        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -126,7 +113,7 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
                 btnBackToHomeActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 210, 60));
+        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -135,11 +122,11 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Mã số thuế");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 190, 170, 40));
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 170, 170, 40));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Tên công ty");
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 140, 40));
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 70, 140, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel13.setText("Thông tin chi tiết");
@@ -147,91 +134,91 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
 
         txtNumOfBranch.setEditable(false);
         txtNumOfBranch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtNumOfBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 240, 310, 40));
+        jPanel6.add(txtNumOfBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 220, 310, 40));
 
         txtRepresentative.setEditable(false);
         txtRepresentative.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtRepresentative, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 140, 310, 40));
+        jPanel6.add(txtRepresentative, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 120, 310, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Email");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 490, 140, 40));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 470, 140, 40));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Người đại diện");
-        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 140, 140, 40));
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 140, 40));
 
         txtTaxID.setEditable(false);
         txtTaxID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtTaxID, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 190, 310, 40));
+        jPanel6.add(txtTaxID, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 170, 310, 40));
 
         txtCompanyName.setEditable(false);
         txtCompanyName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtCompanyName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 90, 310, 40));
-
-        txtUsername.setEditable(false);
-        txtUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 310, 40));
+        jPanel6.add(txtCompanyName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, 310, 40));
 
         txtStatus.setEditable(false);
         txtStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 310, 40));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Loại người dùng");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 170, 40));
+        jPanel6.add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 310, 40));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("Tình trạng");
-        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 140, 40));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Tên đăng nhập");
-        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 140, 40));
+        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 140, 40));
 
         txtEmail.setEditable(false);
         txtEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 490, 310, 40));
+        jPanel6.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 470, 310, 40));
 
         txtNumOfPackage.setEditable(false);
         txtNumOfPackage.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtNumOfPackage, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 290, 310, 40));
+        jPanel6.add(txtNumOfPackage, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 270, 310, 40));
 
         txtTypeOfPackage.setEditable(false);
         txtTypeOfPackage.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtTypeOfPackage, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 340, 310, 40));
+        jPanel6.add(txtTypeOfPackage, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 320, 310, 40));
 
         txtAddress.setEditable(false);
         txtAddress.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 390, 310, 40));
+        jPanel6.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 370, 310, 40));
 
         txtPhone.setEditable(false);
         txtPhone.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 310, 40));
+        jPanel6.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 420, 310, 40));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Số điện thoại");
-        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 440, 140, 40));
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 420, 140, 40));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Số lượng đơn hàng");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 290, 170, 40));
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 270, 170, 40));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel16.setText("Loại hàng vận chuyển");
-        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 340, 200, 40));
+        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 320, 200, 40));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("Địa chỉ kinh doanh");
-        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 390, 180, 40));
+        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 370, 180, 40));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel18.setText("Số chi nhánh");
-        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 240, 140, 40));
+        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 220, 140, 40));
 
-        txtUserType.setEditable(false);
-        txtUserType.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtUserType, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 310, 40));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setText("Mã tài khoản");
+        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 140, 40));
+
+        txtAccountID.setEditable(false);
+        txtAccountID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtAccountID, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 310, 40));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel19.setText("2: Đối tác");
+        jPanel6.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 140, 40));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel12.setText("Loại người dùng");
+        jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 170, 40));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1520, 550));
 
@@ -267,25 +254,97 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void hideEditButton() {
+        btnEdit.hide();
+    }
+    public void loadData() {
+        try {
+            conn = DBInfo.connect();
+            //load data from QUANTRIVIEN table
+            pstmt = conn.prepareStatement("select * from DOITAC where MADT = ?");
+            pstmt.setString(1, currentUser);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                txtCompanyName.setText(rs.getString("TENDT"));
+                txtRepresentative.setText(rs.getString("NGUOIDAIDIEN"));
+                txtTaxID.setText(rs.getString("MAST"));
+                txtNumOfBranch.setText(rs.getString("SOCN"));
+                txtNumOfPackage.setText(rs.getString("SOLUONGDH"));
+                txtTypeOfPackage.setText(rs.getString("LOAIHANGVC"));
+                txtAddress.setText(rs.getString("DIACHIKD"));
+                txtPhone.setText(rs.getString("SDT"));
+                txtEmail.setText(rs.getString("EMAIL"));
+            }
+                
+            
+            //load data from TAIKHOAN table
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ?");
+            pstmt.setString(1, currentUser);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                txtAccountID.setText(currentUser);
+                int status = Integer.parseInt(rs.getString("TINHTRANG"));
+                
+                if (status == 0) {
+                    txtStatus.setText("Bị khóa");
+                } else {
+                    txtStatus.setText("Bình thường");
+                }
+            }
+            
+            //System.out.println(rs.getString("MATK"));
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongTinQuanTriVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-
+        QTVCapNhatDoiTac adminUpdatePartner = new QTVCapNhatDoiTac();
+        adminUpdatePartner.userID = userID;
+        adminUpdatePartner.userType = userType;
+        adminUpdatePartner.currentUser = currentUser;
+        
+        this.hide();
+        adminUpdatePartner.loadData();
+        adminUpdatePartner.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProfileActionPerformed
-        // TODO add your handling code here:
+        if (Integer.parseInt(userType) == 0) {
+            ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
+            adminInfo.userID = userID;
+            adminInfo.userType = userType;
+            adminInfo.currentUser = userID;
+
+            this.hide();
+            adminInfo.loadData();
+            adminInfo.setVisible(true);
+        }
+        else {
+            
+        }
     }//GEN-LAST:event_btnViewProfileActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        DangNhap login = new DangNhap();
+        this.hide();
+        login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
-        // TODO add your handling code here:
+        if (Integer.parseInt(userType) == 0) {
+            QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+            admin.userID = userID;
+            admin.userType = userType;
+            admin.currentUser = currentUser;
+
+            this.hide();
+            admin.setVisible(true);
+        } 
+        else {
+            
+        }
     }//GEN-LAST:event_btnBackToHomeActionPerformed
 
     /**
@@ -324,7 +383,6 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBackToHome;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLogout;
@@ -332,17 +390,18 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -350,6 +409,7 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JTextField txtAccountID;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtCompanyName;
     private javax.swing.JTextField txtEmail;
@@ -360,7 +420,5 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
     private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtTaxID;
     private javax.swing.JTextField txtTypeOfPackage;
-    private javax.swing.JTextField txtUserType;
-    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  *  Student's ID: 19127622
@@ -20,7 +21,8 @@ import java.util.logging.Logger;
  */
 public class ThongTinQuanTriVien extends javax.swing.JFrame {
     String userID = "QTV0001";
-    String userType = "";
+    String userType = "0";
+    String currentUser = "QTV0002";
     
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -30,7 +32,6 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
      */
     public ThongTinQuanTriVien() {
         initComponents();
-        loadData();
     }
 
     /**
@@ -50,7 +51,6 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnBackToHome = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnBack1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -58,7 +58,9 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
         txtStatus = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtUserType = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         txtAccountID = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         btnViewProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -96,7 +98,7 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 210, 60));
+        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -114,16 +116,7 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 210, 60));
-
-        btnBack1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnBack1.setText("Quay lại");
-        btnBack1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBack1ActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnBack1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 210, 60));
+        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -132,10 +125,10 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Loại người dùng");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 170, 40));
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 170, 40));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Mã tài khoản");
+        jLabel8.setText("Họ tên");
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 140, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -144,19 +137,27 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
 
         txtStatus.setEditable(false);
         txtStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, 310, 40));
+        jPanel6.add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 310, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Tình trạng");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 140, 40));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 140, 40));
 
         txtUserType.setEditable(false);
         txtUserType.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtUserType, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 310, 40));
+        jPanel6.add(txtUserType, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, 310, 40));
+
+        txtName.setEditable(false);
+        txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 310, 40));
 
         txtAccountID.setEditable(false);
         txtAccountID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtAccountID, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 310, 40));
+        jPanel6.add(txtAccountID, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 310, 40));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setText("Mã tài khoản");
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 140, 40));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1520, 550));
 
@@ -196,12 +197,20 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
     public void loadData() {
         try {
             conn = DBInfo.connect();
-            pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ?");
-            
-            pstmt.setString(1, userID);
+            //load data from QUANTRIVIEN table
+            pstmt = conn.prepareStatement("select * from QUANTRIVIEN where MAQTV = ?");
+            pstmt.setString(1, currentUser);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                txtAccountID.setText(userID);
+                txtName.setText(rs.getString("TENQTV"));
+            }
+            
+            //load data from TAIKHOAN table
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ?");
+            pstmt.setString(1, currentUser);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                txtAccountID.setText(currentUser);
                 txtUserType.setText("Quản trị viên");
                 int status = Integer.parseInt(rs.getString("TINHTRANG"));
                 
@@ -220,27 +229,70 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
     
     
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
+        QTVCapNhatQuanTriVien adminUpdateAdmin = new QTVCapNhatQuanTriVien();
+        adminUpdateAdmin.userID = userID;
+        adminUpdateAdmin.userType = userType;
+        adminUpdateAdmin.currentUser = currentUser;
+        
+        this.hide();
+        adminUpdateAdmin.loadData();
+        adminUpdateAdmin.setVisible(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
-        // TODO add your handling code here:
+	QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+        admin.userID = userID;
+        admin.userType = userType;
+        admin.currentUser = currentUser;
+        
+        this.hide();
+        admin.setVisible(true);
     }//GEN-LAST:event_btnBackToHomeActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        try {
+         
+            int deleteItem = JOptionPane.showConfirmDialog(null,"Bạn chắc chắn muốn xóa?",
+                    "Xóa tài khoản", JOptionPane.YES_NO_OPTION);
+            if (deleteItem ==  JOptionPane.YES_OPTION) {
+                conn = DBInfo.connect();
+                //load data from QUANTRIVIEN table
+                pstmt = conn.prepareStatement("delete QUANTRIVIEN where MAQTV = ?");
+                pstmt.setString(1, userID);
+                pstmt.executeUpdate();
+
+                //load data from TAIKHOAN table
+                pstmt = conn.prepareStatement("delete TAIKHOAN where MATK = ?");
+                pstmt.setString(1, userID);
+                pstmt.executeUpdate();
+            }
+            QTVQuanTriNguoiDung qtv = new QTVQuanTriNguoiDung();
+            qtv.userID = userID;
+            qtv.userType = userType;
+            this.hide();
+            qtv.setVisible(true);
+            
+            JOptionPane.showMessageDialog(this, "Xóa thành công!");
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongTinQuanTriVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBack1ActionPerformed
-
     private void btnViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProfileActionPerformed
-        // TODO add your handling code here:
+        ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
+        adminInfo.userID = userID;
+        adminInfo.userType = userType;
+        adminInfo.currentUser = userID;
+        
+        this.hide();
+        adminInfo.loadData();
+        adminInfo.setVisible(true);
     }//GEN-LAST:event_btnViewProfileActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        DangNhap login = new DangNhap();
+        this.hide();
+        login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
@@ -274,12 +326,12 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ThongTinQuanTriVien().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnBackToHome;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnLogout;
@@ -292,12 +344,14 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField txtAccountID;
+    private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtUserType;
     // End of variables declaration//GEN-END:variables

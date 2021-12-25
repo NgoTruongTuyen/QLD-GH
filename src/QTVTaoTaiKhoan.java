@@ -1,3 +1,10 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+
 /*
  *  Student's ID: 19127622
  *  Full name: Ngo Truong Tuyen
@@ -11,7 +18,13 @@
  * @author zerotus
  */
 public class QTVTaoTaiKhoan extends javax.swing.JFrame {
-
+    String userID;
+    String userType;
+    String currentUser;
+    
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
     /**
      * Creates new form QTVThemTaiKhoan
      */
@@ -42,11 +55,13 @@ public class QTVTaoTaiKhoan extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jLabel13 = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         comboUserType = new javax.swing.JComboBox<>();
         comboStatus = new javax.swing.JComboBox<>();
+        txtAccountID = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         btnViewProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -111,40 +126,47 @@ public class QTVTaoTaiKhoan extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Loại người dùng");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 170, 40));
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 340, 170, 40));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Mật khẩu");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 140, 40));
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 140, 40));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Mã tài khoản");
+        jLabel8.setText("Họ tên");
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 140, 40));
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 310, 40));
+        jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, 310, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel13.setText("Tạo tài khoản");
-        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 180, 40));
+        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 180, 40));
 
-        txtUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel6.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 310, 40));
+        txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 310, 40));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 140, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Tình trạng");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 140, 40));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, 140, 40));
 
         comboUserType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Chọn loại người dùng---", "0: Quản trị viên", "1: Nhân viên" }));
-        jPanel6.add(comboUserType, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, 310, 40));
+        jPanel6.add(comboUserType, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 340, 310, 40));
 
         comboStatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Chọn loại tình trạng---", "0: Khóa", "1: Bình thường" }));
-        jPanel6.add(comboStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 310, 40));
+        jPanel6.add(comboStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, 310, 40));
+
+        txtAccountID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel6.add(txtAccountID, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 310, 40));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("Mã tài khoản");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 140, 40));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1520, 550));
 
@@ -181,24 +203,97 @@ public class QTVTaoTaiKhoan extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+    private int getUserType(String id) {
+        return Integer.parseInt(id.substring(0, 1));
+    }
+    
+    private int getStatus(String status) {
+        return Integer.parseInt(status.substring(0, 1));
+    }
 
+    
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        try{
+            
+            String id = txtAccountID.getText();
+            id = id.replaceAll("\\s+", "");
+            String password = new String(txtPassword.getPassword());
+            int type = getUserType(comboUserType.getSelectedItem().toString());
+            int status = getStatus(comboStatus.getSelectedItem().toString());
+            
+            conn = DBInfo.connect();
+            //insert into TAIKHOAN table
+            pstmt = conn.prepareStatement("insert into TAIKHOAN(MATK, MATKHAU, LOAIND, TINHTRANG) "
+                                            + "values (?, ?, ?, ?)");
+            
+            pstmt.setString(1, id);
+            pstmt.setString(2, password);
+            pstmt.setInt(3, type);
+            pstmt.setInt(4, status);
+            pstmt.executeUpdate();
+            
+            if (type == 0) {
+                //insert into QUANTRIVIEN table
+                pstmt = conn.prepareStatement("insert into QUANTRIVIEN(MAQTV, TENQTV) "
+                + "values (?, ?)");
+                pstmt.setString(1, id);
+                pstmt.setString(2, txtName.getText());
+            }
+            else {
+                //insert into NHANVIEN table
+                pstmt = conn.prepareStatement("insert into NHANVIEN(MANV, TENNV) "
+                + "values (?, ?)");
+                pstmt.setString(1, id);
+                pstmt.setString(2, txtName.getText());
+            }
+            pstmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công!");
+            txtName.setText("");
+            txtAccountID.setText("");
+            txtPassword.setText("");
+            comboUserType.setSelectedIndex(0);
+            comboStatus.setSelectedIndex(0);
+            
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, tạo tài khoản không thành công!");
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+        admin.userID = userID;
+        admin.userType = userType;
+        admin.currentUser = currentUser;
+        this.hide();
+        admin.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProfileActionPerformed
-        // TODO add your handling code here:
+        ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
+        adminInfo.userID = userID;
+        adminInfo.userType = userType;
+        adminInfo.currentUser = userID;
+        
+        this.hide();
+        adminInfo.loadData();
+        adminInfo.setVisible(true);
     }//GEN-LAST:event_btnViewProfileActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        DangNhap login = new DangNhap();
+        this.hide();
+        login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
-        // TODO add your handling code here:
+        QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+        admin.userID = userID;
+        admin.userType = userType;
+        admin.currentUser = currentUser;
+        
+        this.hide();
+        admin.setVisible(true);
     }//GEN-LAST:event_btnBackToHomeActionPerformed
 
     /**
@@ -246,6 +341,7 @@ public class QTVTaoTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboStatus;
     private javax.swing.JComboBox<String> comboUserType;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -259,7 +355,8 @@ public class QTVTaoTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JTextField txtAccountID;
+    private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

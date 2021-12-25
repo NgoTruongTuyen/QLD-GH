@@ -22,12 +22,17 @@ public class DangNhap extends javax.swing.JFrame {
     
     static String userID;
     static String userType;
+    static String currentUser;
+    
     private JFrame frame;
     /**
      * Creates new form Login
      */
     public DangNhap() {
         initComponents();
+        userID = "";
+        userType = "";
+        currentUser = "";
     }
 
     /**
@@ -45,8 +50,9 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
         btnCancel = new javax.swing.JButton();
-        txtPassword = new javax.swing.JTextField();
+        btnSignUp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -85,7 +91,10 @@ public class DangNhap extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 170, 50));
+        jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 170, 50));
+
+        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 260, 40));
 
         btnCancel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnCancel.setText("Thoát");
@@ -94,14 +103,20 @@ public class DangNhap extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        jPanel3.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 170, 50));
+        jPanel3.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 170, 50));
 
-        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 260, 40));
+        btnSignUp.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnSignUp.setText("Đăng ký tài khoản");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignUpActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 360, 50));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 600, 330));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 590, 380));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 480));
 
         pack();
         setLocationRelativeTo(null);
@@ -112,7 +127,7 @@ public class DangNhap extends javax.swing.JFrame {
             conn = DBInfo.connect();
             pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ? AND MATKHAU = ?");
             pstmt.setString(1, txtUsername.getText());
-            pstmt.setString(2, txtPassword.getText());
+            pstmt.setString(2, new String(txtPassword.getPassword()));
             rs = pstmt.executeQuery();
             
             if (rs.next()) {
@@ -120,6 +135,7 @@ public class DangNhap extends javax.swing.JFrame {
                 userType = rs.getString("LOAIND");
                 int type = Integer.parseInt(userType);
                 int status = Integer.parseInt(rs.getString("TINHTRANG"));
+                
                 if (status == 0) {
                     frame = new JFrame("Thông báo");
                     JOptionPane.showMessageDialog(frame, "Tài khoản của bạn đã bị khóa","Thông báo",JOptionPane.WARNING_MESSAGE);
@@ -129,19 +145,53 @@ public class DangNhap extends javax.swing.JFrame {
                 else {
                     switch(type) {
                         case 0:
-                            QTVQuanTriNguoiDung qtv = new QTVQuanTriNguoiDung();
-                            qtv.userID = userID;
-                            qtv.userType = userType;
+                            QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
+                            admin.userID = userID;
+                            admin.userType = userType;
+                            admin.currentUser = userID;
+                            
                             this.hide();
-                            qtv.setVisible(true);
+                            admin.setVisible(true);
                             break;
                         case 1:
                           // code block
+                            NV_XemVaDuyetHD NV = new NV_XemVaDuyetHD();
+                            this.hide();
+                            NV.setVisible(true);
                             break;
+                        case 2:
+                          // code block
+                            DT_DashBoard1  DT = new DT_DashBoard1();
+                            this.hide();
+                            DT.setVisible(true);
+                            
+                            break;   
+                        case 3:
+                          // code block
+                           // DT_DashBoard  DT = new DT_DashBoard();
+                            this.hide();
+                            
+                          //  DT.setVisible(true);
+                            
+                            break;
+                        case 4:
+                          // code block
+                            //
+                            
+                         //   DT.setVisible(true);
+                            KH_DashBoard KH = new KH_DashBoard();
+                            this.hide();
+                            KH.setVisible(true);
+                            break;      
                         default:
                           // code block
                     }
                 } 
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Sai mật khẩu!");
+                txtUsername.setText("");
+                txtPassword.setText("");
             }
 
         } catch (SQLException ex) {
@@ -156,6 +206,13 @@ public class DangNhap extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        DangKy DK = new DangKy();
+        DK.setVisible(true);
+    }//GEN-LAST:event_btnSignUpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +241,12 @@ public class DangNhap extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -196,13 +259,14 @@ public class DangNhap extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSignUp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

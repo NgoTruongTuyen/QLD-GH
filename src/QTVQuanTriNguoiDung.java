@@ -1,14 +1,13 @@
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-/*
- *  Student's ID: 19127622
- *  Full name: Ngo Truong Tuyen
- *  Subject: Java Programming
- *  Assignment :
- *  Problem :
- */
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,13 +19,15 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
     ResultSet rs = null;
     
     
-    String userID;
-    String userType;
+    String userID = "QTV0001";
+    String userType = "0";
+    String currentUser = "QTV0001";
     /**
      * Creates new form ThongTinDoiTac
      */
     public QTVQuanTriNguoiDung() {
         initComponents();
+        updateDB();
     }
 
     /**
@@ -43,13 +44,10 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         btnDetail = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        btnBackToHome = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         btnFilterCustomer = new javax.swing.JButton();
@@ -62,7 +60,7 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
-        txtSearchingUsername = new javax.swing.JTextField();
+        txtSearchByAccountID = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableUserList = new javax.swing.JTable();
@@ -96,15 +94,6 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
 
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEdit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnEdit.setText("Sửa");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 170, 60));
-
         btnDelete.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnDelete.setText("Xóa");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +101,7 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 170, 60));
+        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 170, 60));
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnAdd.setText("Thêm");
@@ -121,16 +110,7 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
-        jPanel8.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 60));
-
-        btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnBack.setText("Quay lại");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 10, 170, 60));
+        jPanel8.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 170, 60));
 
         btnDetail.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnDetail.setText("Chi tiết");
@@ -139,7 +119,7 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
                 btnDetailActionPerformed(evt);
             }
         });
-        jPanel8.add(btnDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 170, 60));
+        jPanel8.add(btnDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 170, 60));
 
         btnRefresh.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnRefresh.setText("Tải lại");
@@ -148,16 +128,7 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
                 btnRefreshActionPerformed(evt);
             }
         });
-        jPanel8.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 170, 60));
-
-        btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnBackToHome.setText("Trang chủ");
-        btnBackToHome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackToHomeActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 10, 160, 60));
+        jPanel8.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 10, 170, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -168,18 +139,38 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
 
         btnFilterCustomer.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnFilterCustomer.setText("Khách hàng");
+        btnFilterCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterCustomerActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnFilterCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 310, 40));
 
         btnFilterAll.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnFilterAll.setText("Tất cả");
+        btnFilterAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterAllActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnFilterAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 310, 40));
 
         btnFilterDriver.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnFilterDriver.setText("Tài xế");
+        btnFilterDriver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterDriverActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnFilterDriver, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 310, 40));
 
         btnFilterPartner.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnFilterPartner.setText("Đối tác");
+        btnFilterPartner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterPartnerActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnFilterPartner, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 310, 40));
 
         btnFilterManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -193,6 +184,11 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
 
         btnFilterAdmin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnFilterAdmin.setText("Quản trị viên");
+        btnFilterAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterAdminActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnFilterAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 310, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -217,15 +213,15 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
         jLabel14.setText("Tìm kiếm");
         jPanel7.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 180, 40));
 
-        txtSearchingUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel7.add(txtSearchingUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 260, 40));
+        txtSearchByAccountID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel7.add(txtSearchByAccountID, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 260, 40));
 
         jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 470, 90));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tableUserList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tableUserList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tableUserList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -272,7 +268,9 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1540, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,50 +281,515 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
+    private void updateDB() {
+        int nums, type, status;
+        String typeString;
+        String statusString;
+        try{
+            conn = DBInfo.connect();
+            pstmt = conn.prepareStatement("select * from TAIKHOAN");
+            
+            rs = pstmt.executeQuery();
+            ResultSetMetaData stData = rs.getMetaData();
+            
+            //nums = stData.getColumnCount();
+            nums = 3;
+            DefaultTableModel recordTable = (DefaultTableModel) tableUserList.getModel();
+            recordTable.setRowCount(0);
+            while (rs.next()) {
+                Vector columnData = new Vector();
+                
+                for (int i = 0; i < nums; i++) {
+                    columnData.add(rs.getString("MATK"));
+                    type = Integer.parseInt(rs.getString("LOAIND"));
+                    status = Integer.parseInt(rs.getString("TINHTRANG"));
+                    switch (type) {
+                        case 0: 
+                            typeString = "Quản trị viên";
+                            break;
+                        case 1: 
+                            typeString = "Nhân viên";
+                            break;
+                        case 2: 
+                            typeString = "Đối tác";
+                            break;
+                            
+                        case 3: 
+                            typeString = "Tài xế";
+                            break;
+                        default:
+                            typeString = "Khách hàng"; 
+                    }
+                    
+                    if (status == 0) {
+                        statusString = "Bị khóa";
+                    }
+                    else {
+                        statusString = "Bình thường";
+                    }
+                    
+                    columnData.add(typeString);
+                    columnData.add(statusString);
+                }
+                
+                recordTable.addRow(columnData);
+            }
+            
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
+    }
+    
+    private String getTableName(String id) {
+        String preCode = id.substring(0, 2);
+        String result;
+        switch (preCode) {
+            case "NV":
+                result = "NHANVIEN";
+                break;
+            case "DT":
+                result = "DOITAC";
+                break;
+            case "TX":
+                result = "TAIXE";
+                break;
+            case "KH":
+                result = "KHACHHANG";
+                break;
+            default:
+                result = "QUANTRIVIEN";   
+        } 
+        
+        return result;
+    }
+    
+    private int getUserType(String id) {
+        String preCode = id.substring(0, 2);
+        int result;
+        switch (preCode) {
+            case "NV":
+                result = 1;
+                break;
+            case "DT":
+                result = 2;
+                break;
+            case "TX":
+                result = 3;
+                break;
+            case "KH":
+                result = 4;
+                break;
+            default:
+                result = 0;   
+        } 
+        
+        return result;
+    }
+    
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        System.out.println(userID);
-        //txtSearchingUsername.setText(userID);
+        QTVTaoTaiKhoan adminCreate = new QTVTaoTaiKhoan();
+        adminCreate.userID = userID;
+        adminCreate.userType = userType;
+        adminCreate.currentUser = currentUser;
+        this.hide();
+        adminCreate.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel recordTable = (DefaultTableModel)tableUserList.getModel();
+        int selectedRows = tableUserList.getSelectedRow();
+
+        try {
+            String id = recordTable.getValueAt(selectedRows, 0).toString();
+            id = id.replaceAll("\\s+", "");
+            int type = this.getUserType(id);
+
+            switch (type) {
+                case 0:
+                    ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
+                    adminInfo.userID = userID;
+                    adminInfo.userType = userType;
+                    adminInfo.currentUser = id;
+                    
+                    this.hide();
+                    adminInfo.loadData();
+                    adminInfo.setVisible(true);
+                    break;
+                case 1:
+                    ThongTinNhanVien managerInfo = new ThongTinNhanVien();
+                    managerInfo.userID = userID;
+                    managerInfo.userType = userType;
+                    managerInfo.currentUser = id;
+                    
+                    this.hide();
+                    managerInfo.loadData();
+                    managerInfo.setVisible(true);
+                    break;
+                case 2:
+                    ThongTinDoiTac PartnerInfo = new ThongTinDoiTac();
+                    PartnerInfo.userID = userID;
+                    PartnerInfo.userType = userType;
+                    PartnerInfo.currentUser = id;
+
+                    this.hide();
+                    PartnerInfo.loadData();
+                    PartnerInfo.setVisible(true);
+                    break;
+                case 3:
+                    ThongTinTaiXe DriverInfo = new ThongTinTaiXe();
+                    DriverInfo.userID = userID;
+                    DriverInfo.userType = userType;
+                    DriverInfo.currentUser = id;
+
+                    this.hide();
+                    DriverInfo.loadData();
+                    DriverInfo.setVisible(true);
+                    break;
+                default:
+                    ThongTinKhachHang CustomerInfo = new ThongTinKhachHang();
+                    CustomerInfo.userID = userID;
+                    CustomerInfo.userType = userType;
+                    CustomerInfo.currentUser = id;
+
+                    this.hide();
+                    CustomerInfo.loadData();
+                    CustomerInfo.setVisible(true);
+                    break;
+            }
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, không thể xem chi tiết tài khoản!");
+        }
     }//GEN-LAST:event_btnDetailActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        int type, status;
+        String typeString;
+        String statusString;
+        try{
+            conn = DBInfo.connect();
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where MATK = ?");
+            pstmt.setString(1, txtSearchByAccountID.getText());
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData stData = rs.getMetaData();
+            boolean found = false;
+            
+            DefaultTableModel recordTable = (DefaultTableModel) tableUserList.getModel();
+            recordTable.setRowCount(0);
+            
+            while (rs.next()) {
+                found = true;
+                Vector columnData = new Vector();
+                columnData.add(rs.getString("MATK"));
+                type = Integer.parseInt(rs.getString("LOAIND"));
+                status = Integer.parseInt(rs.getString("TINHTRANG"));
+                switch (type) {
+                    case 0: 
+                        typeString = "Quản trị viên";
+                        break;
+                    case 1: 
+                        typeString = "Nhân viên";
+                        break;
+                    case 2: 
+                        typeString = "Đối tác";
+                        break;
+
+                    case 3: 
+                        typeString = "Tài xế";
+                        break;
+                    default:
+                        typeString = "Khách hàng"; 
+                }
+
+                if (status == 0) {
+                    statusString = "Bị khóa";
+                }
+                else {
+                    statusString = "Bình thường";
+                }
+
+                columnData.add(typeString);
+                columnData.add(statusString);
+                
+                recordTable.addRow(columnData);
+            }
+            
+            if (found == false) {
+                String rsMessage = "Mã tài khoản không tồn tại, vui lòng nhập lại!";
+                JOptionPane.showMessageDialog(this, rsMessage);
+                this.btnRefreshActionPerformed(evt);
+            }
+            
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnFilterManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterManagerActionPerformed
-        // TODO add your handling code here:
+        int type, status;
+        String typeString;
+        String statusString;
+        try{
+            conn = DBInfo.connect();
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where LOAIND = 1");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData stData = rs.getMetaData();
+            
+            DefaultTableModel recordTable = (DefaultTableModel) tableUserList.getModel();
+            recordTable.setRowCount(0);
+            
+            while (rs.next()) {
+                Vector columnData = new Vector();
+                columnData.add(rs.getString("MATK"));
+                status = Integer.parseInt(rs.getString("TINHTRANG"));
+                if (status == 0) {
+                    statusString = "Bị khóa";
+                }
+                else {
+                    statusString = "Bình thường";
+                }
+
+                columnData.add("Nhân viên");
+                columnData.add(statusString);
+                
+                recordTable.addRow(columnData);
+            }
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }//GEN-LAST:event_btnFilterManagerActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        // TODO add your handling code here:
+        txtSearchByAccountID.setText("");
+        
+        DefaultTableModel RecordTable = (DefaultTableModel) tableUserList.getModel();
+        RecordTable.setRowCount(0);
+        
+        updateDB();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackToHomeActionPerformed
-
     private void btnViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProfileActionPerformed
-        // TODO add your handling code here:
+        ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
+        adminInfo.userID = userID;
+        adminInfo.userType = userType;
+        adminInfo.currentUser = userID;
+        this.hide();
+        adminInfo.loadData();
+        adminInfo.setVisible(true);
     }//GEN-LAST:event_btnViewProfileActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        DangNhap login = new DangNhap();
+        this.hide();
+        login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnFilterAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterAllActionPerformed
+        txtSearchByAccountID.setText("");
+        
+        DefaultTableModel RecordTable = (DefaultTableModel) tableUserList.getModel();
+        RecordTable.setRowCount(0);
+        
+        updateDB();
+    }//GEN-LAST:event_btnFilterAllActionPerformed
+
+    private void btnFilterAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterAdminActionPerformed
+        int type, status;
+        String typeString;
+        String statusString;
+        try{
+            conn = DBInfo.connect();
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where LOAIND = 0");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData stData = rs.getMetaData();
+            
+            DefaultTableModel recordTable = (DefaultTableModel) tableUserList.getModel();
+            recordTable.setRowCount(0);
+            
+            while (rs.next()) {
+                Vector columnData = new Vector();
+                columnData.add(rs.getString("MATK"));
+                status = Integer.parseInt(rs.getString("TINHTRANG"));
+                if (status == 0) {
+                    statusString = "Bị khóa";
+                }
+                else {
+                    statusString = "Bình thường";
+                }
+
+                columnData.add("Quản trị viên");
+                columnData.add(statusString);
+                
+                recordTable.addRow(columnData);
+            }
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btnFilterAdminActionPerformed
+
+    private void btnFilterPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterPartnerActionPerformed
+        int type, status;
+        String typeString;
+        String statusString;
+        try{
+            conn = DBInfo.connect();
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where LOAIND = 2");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData stData = rs.getMetaData();
+            
+            DefaultTableModel recordTable = (DefaultTableModel) tableUserList.getModel();
+            recordTable.setRowCount(0);
+            
+            while (rs.next()) {
+                Vector columnData = new Vector();
+                columnData.add(rs.getString("MATK"));
+                status = Integer.parseInt(rs.getString("TINHTRANG"));
+                if (status == 0) {
+                    statusString = "Bị khóa";
+                }
+                else {
+                    statusString = "Bình thường";
+                }
+
+                columnData.add("Đối tác");
+                columnData.add(statusString);
+                
+                recordTable.addRow(columnData);
+            }
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btnFilterPartnerActionPerformed
+
+    private void btnFilterDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterDriverActionPerformed
+        int type, status;
+        String typeString;
+        String statusString;
+        try{
+            conn = DBInfo.connect();
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where LOAIND = 3");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData stData = rs.getMetaData();
+            
+            DefaultTableModel recordTable = (DefaultTableModel) tableUserList.getModel();
+            recordTable.setRowCount(0);
+            
+            while (rs.next()) {
+                Vector columnData = new Vector();
+                columnData.add(rs.getString("MATK"));
+                status = Integer.parseInt(rs.getString("TINHTRANG"));
+                if (status == 0) {
+                    statusString = "Bị khóa";
+                }
+                else {
+                    statusString = "Bình thường";
+                }
+
+                columnData.add("Tài xế");
+                columnData.add(statusString);
+                
+                recordTable.addRow(columnData);
+            }
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btnFilterDriverActionPerformed
+
+    private void btnFilterCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterCustomerActionPerformed
+        int type, status;
+        String typeString;
+        String statusString;
+        try{
+            conn = DBInfo.connect();
+            pstmt = conn.prepareStatement("select * from TAIKHOAN where LOAIND = 4");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData stData = rs.getMetaData();
+            
+            DefaultTableModel recordTable = (DefaultTableModel) tableUserList.getModel();
+            recordTable.setRowCount(0);
+            
+            while (rs.next()) {
+                Vector columnData = new Vector();
+                columnData.add(rs.getString("MATK"));
+                status = Integer.parseInt(rs.getString("TINHTRANG"));
+                if (status == 0) {
+                    statusString = "Bị khóa";
+                }
+                else {
+                    statusString = "Bình thường";
+                }
+
+                columnData.add("Khách hàng");
+                columnData.add(statusString);
+                
+                recordTable.addRow(columnData);
+            }
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btnFilterCustomerActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        DefaultTableModel recordTable = (DefaultTableModel)tableUserList.getModel();
+        int selectedRows = tableUserList.getSelectedRow();
+
+        try{
+            String id = recordTable.getValueAt(selectedRows, 0).toString();
+            id = id.replaceAll("\\s+", "");
+            boolean deletePermission = false;
+
+            
+            int type = this.getUserType(id);
+
+            if (type == 0 || type == 1) {
+                deletePermission = true;
+            }
+            String rsMessage = "Bạn không có quyền xóa tài khoản này!";
+            if (userID.equals(id)) {
+                deletePermission = false;
+                rsMessage = "Bạn không thể xóa chính tài khoản của mình";
+            }
+
+            if (deletePermission) {
+                int deleteItem = JOptionPane.showConfirmDialog(null,"Bạn chắc chắn muốn xóa?",
+                    "Xóa tài khoản", JOptionPane.YES_NO_OPTION);
+                if (deleteItem ==  JOptionPane.YES_OPTION) {
+                    conn = DBInfo.connect();
+                    //Xóa thông tin người dùng
+                    if (type == 0) {
+                        pstmt = conn.prepareStatement("delete from QUANTRIVIEN where MAQTV = ?");
+                        pstmt.setString(1, id);
+                    }
+                    else {
+                        pstmt = conn.prepareStatement("delete from NHANVIEN where MANV = ?");
+                        pstmt.setString(1, id);
+                    }
+                    pstmt.executeUpdate();
+
+                    //Xóa tài khoản người dùng
+                    pstmt = conn.prepareStatement("delete from TAIKHOAN where MATK = ?");
+                    pstmt.setString(1, id);
+                    pstmt.executeUpdate();
+
+                    this.btnRefreshActionPerformed(evt);
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(this, rsMessage);
+            }
+
+        } catch(Exception ex){
+
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, xóa không thành công!");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,11 +829,8 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnBackToHome;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDetail;
-    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnFilterAdmin;
     private javax.swing.JButton btnFilterAll;
     private javax.swing.JButton btnFilterCustomer;
@@ -396,6 +856,6 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableUserList;
-    private javax.swing.JTextField txtSearchingUsername;
+    private javax.swing.JTextField txtSearchByAccountID;
     // End of variables declaration//GEN-END:variables
 }
