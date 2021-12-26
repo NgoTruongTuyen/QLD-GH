@@ -51,7 +51,6 @@ public class DangNhap extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
-        btnCancel = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,7 +67,7 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel1.setText("Đăng nhập");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 70));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,32 +90,23 @@ public class DangNhap extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 170, 50));
+        jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 170, 50));
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 260, 40));
 
-        btnCancel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnCancel.setText("Thoát");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 170, 50));
-
         btnSignUp.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnSignUp.setText("Đăng ký tài khoản");
+        btnSignUp.setText("Đăng ký");
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignUpActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 360, 50));
+        jPanel3.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 170, 50));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 590, 380));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 480));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 450));
 
         pack();
         setLocationRelativeTo(null);
@@ -167,8 +157,6 @@ public class DangNhap extends javax.swing.JFrame {
                             
                             break;   
                         case 3:
-                          // code block
-                          //  DT_DashBoard1  DT = new DT_DashBoard1();
                             TXXuLyDonHang driver = new TXXuLyDonHang();
                             driver.userID = userID;
                             driver.userType = userType;
@@ -178,9 +166,6 @@ public class DangNhap extends javax.swing.JFrame {
                             driver.loadData();
                             driver.setVisible(true);
                             break;
-                          //  DT.setVisible(true);
-                            
-                           
                         case 4:
                           // code block
                             //
@@ -205,14 +190,6 @@ public class DangNhap extends javax.swing.JFrame {
             Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        frame = new JFrame("Thoát");
-        if (JOptionPane.showConfirmDialog(frame, "Bạn chắc chắn muốn thoát?", "Hệ thống đặt và giao hàng online",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
@@ -264,7 +241,6 @@ public class DangNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSignUp;
     private javax.swing.JLabel jLabel1;

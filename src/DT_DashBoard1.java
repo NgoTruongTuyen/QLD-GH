@@ -44,11 +44,11 @@ public class DT_DashBoard1 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
+        btnExit = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnDKLDH = new javax.swing.JButton();
         btnQLDH = new javax.swing.JButton();
         btnQLSP = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -77,6 +77,16 @@ public class DT_DashBoard1 extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 570, 40));
 
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnExit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnExit.setText("Thoát");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 10, 180, 60));
+
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -109,15 +119,6 @@ public class DT_DashBoard1 extends javax.swing.JFrame {
         jPanel3.add(btnQLSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 380, 370, 60));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 1520, 560));
-
-        btnExit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnExit.setText("Thoát");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 110, 180, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 780));
 

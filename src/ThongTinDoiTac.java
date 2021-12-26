@@ -258,6 +258,7 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
     public void hideEditButton() {
         btnEdit.hide();
     }
+    
     public void loadData() {
         try {
             conn = DBInfo.connect();
@@ -318,11 +319,21 @@ public class ThongTinDoiTac extends javax.swing.JFrame {
             adminInfo.currentUser = userID;
 
             this.hide();
+            adminInfo.hideDeleteButton();
             adminInfo.loadData();
             adminInfo.setVisible(true);
         }
         else {
-            
+            ThongTinDoiTac PartnerInfo = new ThongTinDoiTac();
+            PartnerInfo.userID = userID;
+            PartnerInfo.userType = userType;
+            PartnerInfo.currentUser = currentUser;
+
+            this.hide();
+            PartnerInfo.hideEditButton();
+            PartnerInfo.loadData();
+            PartnerInfo.setVisible(true);
+
         }
     }//GEN-LAST:event_btnViewProfileActionPerformed
 

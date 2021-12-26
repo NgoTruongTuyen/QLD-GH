@@ -193,19 +193,13 @@ public class KH_DangKyTK extends javax.swing.JFrame {
             ps.setString(5, address);
             ps.setString(6, email);
             ps.executeUpdate();
-            
+            // String 
             JOptionPane.showMessageDialog(null, "Đăng ký thành công\n"
                     + "Tên đăng nhập của bạn là "+CusID+"\n"
                             + "Mật khẩu của bạn là "+Password);
-            txtName.setText("");
-            txtAddress.setText("");
-            txtMail.setText("");
-            txtCMND.setText("");
-            txtPhoneNumber.setText("");
         } catch (SQLException ex) {
             Logger.getLogger(KH_DangKyTK.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

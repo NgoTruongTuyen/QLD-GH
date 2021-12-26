@@ -104,7 +104,7 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
                 btnEditActionPerformed(evt);
             }
         });
-        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 210, 60));
+        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -113,7 +113,7 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
                 btnBackToHomeActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 10, 210, 60));
+        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -289,10 +289,19 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
 
             this.hide();
             adminInfo.loadData();
+            adminInfo.hideDeleteButton();
             adminInfo.setVisible(true);
         }
         else {
-            
+            ThongTinKhachHang customerInfo = new ThongTinKhachHang();
+            customerInfo.userID = userID;
+            customerInfo.userType = userType;
+            customerInfo.currentUser = currentUser;
+
+            this.hide();
+            customerInfo.hideEditButton();
+            customerInfo.loadData();
+            customerInfo.setVisible(true);
         }
     }//GEN-LAST:event_btnViewProfileActionPerformed
 

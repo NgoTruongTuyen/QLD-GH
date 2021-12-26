@@ -268,9 +268,7 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1538, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,34 +425,34 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
                     managerInfo.setVisible(true);
                     break;
                 case 2:
-                    ThongTinDoiTac PartnerInfo = new ThongTinDoiTac();
-                    PartnerInfo.userID = userID;
-                    PartnerInfo.userType = userType;
-                    PartnerInfo.currentUser = id;
+                    ThongTinDoiTac partnerInfo = new ThongTinDoiTac();
+                    partnerInfo.userID = userID;
+                    partnerInfo.userType = userType;
+                    partnerInfo.currentUser = id;
 
                     this.hide();
-                    PartnerInfo.loadData();
-                    PartnerInfo.setVisible(true);
+                    partnerInfo.loadData();
+                    partnerInfo.setVisible(true);
                     break;
                 case 3:
-                    ThongTinTaiXe DriverInfo = new ThongTinTaiXe();
-                    DriverInfo.userID = userID;
-                    DriverInfo.userType = userType;
-                    DriverInfo.currentUser = id;
+                    ThongTinTaiXe driverInfo = new ThongTinTaiXe();
+                    driverInfo.userID = userID;
+                    driverInfo.userType = userType;
+                    driverInfo.currentUser = id;
 
                     this.hide();
-                    DriverInfo.loadData();
-                    DriverInfo.setVisible(true);
+                    driverInfo.loadData();
+                    driverInfo.setVisible(true);
                     break;
                 default:
-                    ThongTinKhachHang CustomerInfo = new ThongTinKhachHang();
-                    CustomerInfo.userID = userID;
-                    CustomerInfo.userType = userType;
-                    CustomerInfo.currentUser = id;
+                    ThongTinKhachHang customerInfo = new ThongTinKhachHang();
+                    customerInfo.userID = userID;
+                    customerInfo.userType = userType;
+                    customerInfo.currentUser = id;
 
                     this.hide();
-                    CustomerInfo.loadData();
-                    CustomerInfo.setVisible(true);
+                    customerInfo.loadData();
+                    customerInfo.setVisible(true);
                     break;
             }
         } catch(Exception ex){
@@ -577,6 +575,7 @@ public class QTVQuanTriNguoiDung extends javax.swing.JFrame {
         adminInfo.currentUser = userID;
         this.hide();
         adminInfo.loadData();
+        adminInfo.hideDeleteButton();
         adminInfo.setVisible(true);
     }//GEN-LAST:event_btnViewProfileActionPerformed
 

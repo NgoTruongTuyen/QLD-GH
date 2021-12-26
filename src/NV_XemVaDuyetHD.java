@@ -180,7 +180,7 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
         btnSelectAll = new javax.swing.JButton();
         btnApprove = new javax.swing.JButton();
         btnRefuse = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -200,6 +200,7 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -236,7 +237,7 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
                 btnConsiderListActionPerformed(evt);
             }
         });
-        jPanel8.add(btnConsiderList, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 360, 60));
+        jPanel8.add(btnConsiderList, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 360, 60));
 
         btnSelectAll.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnSelectAll.setText("Xem tất cả");
@@ -245,7 +246,7 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
                 btnSelectAllActionPerformed(evt);
             }
         });
-        jPanel8.add(btnSelectAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 210, 60));
+        jPanel8.add(btnSelectAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 210, 60));
 
         btnApprove.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnApprove.setText("Duyệt");
@@ -254,7 +255,7 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
                 btnApproveActionPerformed(evt);
             }
         });
-        jPanel8.add(btnApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 210, 60));
+        jPanel8.add(btnApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 210, 60));
 
         btnRefuse.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnRefuse.setText("Không duyệt");
@@ -263,16 +264,16 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
                 btnRefuseActionPerformed(evt);
             }
         });
-        jPanel8.add(btnRefuse, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 210, 60));
+        jPanel8.add(btnRefuse, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 210, 60));
 
-        btnExit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnExit.setText("Thoát");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnBack.setText("Quay lại");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
-        jPanel8.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 0, 130, 50));
+        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -392,7 +393,16 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1520, 560));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1540, 780));
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLogout.setText("Đăng xuất");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 100, -1, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 780));
 
         pack();
         setLocationRelativeTo(null);
@@ -500,6 +510,10 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContractIDActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
+
     private void txtTaxIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaxIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTaxIDActionPerformed
@@ -512,12 +526,11 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPartnerIDActionPerformed
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         DangNhap login = new DangNhap();
         this.hide();
         login.setVisible(true);
-    }//GEN-LAST:event_btnExitActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -559,8 +572,9 @@ public class NV_XemVaDuyetHD extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnConsiderList;
-    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnRefuse;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSelectAll;

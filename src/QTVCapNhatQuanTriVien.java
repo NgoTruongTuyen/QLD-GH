@@ -102,7 +102,7 @@ public class QTVCapNhatQuanTriVien extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 210, 60));
+        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 210, 60));
 
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBack.setText("Quay lại");
@@ -111,7 +111,7 @@ public class QTVCapNhatQuanTriVien extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 210, 60));
+        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -120,7 +120,7 @@ public class QTVCapNhatQuanTriVien extends javax.swing.JFrame {
                 btnBackToHomeActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, 210, 60));
+        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
