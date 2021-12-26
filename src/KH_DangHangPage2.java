@@ -45,7 +45,7 @@ public class KH_DangHangPage2 extends javax.swing.JFrame {
        for(int i=0;i<savedPro.size();i++){
             try {       
             String sql1 ="SELECT * FROM SANPHAM,CHINHANH_SANPHAM"
-                    + " WHERE SANPHAM.MASP=CHINHANH_SANPHAM.MASP AND SANPHAM.MASP = '"+savedPro.get(i).get(0)+"'";
+                    + " WHERE SANPHAM.MASP=CHINHANH_SANPHAM.MASP AND SANPHAM.MASP = '"+savedPro.get(i).get(0)+"'AND MACN ='" +savedPro.get(i).get(2)+"'";
          //   JOptionPane.showMessageDialog(null, savedPro.get(i).get(2));
             Statement statement = connection.createStatement();
             ResultSet rs1 = statement.executeQuery(sql1);

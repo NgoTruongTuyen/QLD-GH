@@ -497,7 +497,10 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChooseSPActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        KH_DashBoard KH = new KH_DashBoard();// TODO add your handling code here:
+        dispose();
+        KH.setVisible(true);
+        
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtSearchDTBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchDTBarActionPerformed

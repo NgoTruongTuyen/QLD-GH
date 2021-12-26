@@ -121,7 +121,9 @@ public class DangKy extends javax.swing.JFrame {
             dispose();
             KH.setVisible(true);
         } else if(result.equals("Tài xế")){
-            
+            TXDangKyTaiKhoan TX = new TXDangKyTaiKhoan();
+            dispose();
+            TX.setVisible(true);
         }
     }//GEN-LAST:event_btnSignUpActionPerformed
 
