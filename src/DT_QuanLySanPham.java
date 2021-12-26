@@ -503,7 +503,7 @@ public class DT_QuanLySanPham extends javax.swing.JFrame {
             return;
        }
         String sql = "UPDATE SANPHAM SET TENSP=?,GIA=? WHERE MASP= ?";
-        String sqlCNSP = "UPDATE CHINHANH_SANPHAM SET MADT=?,MACN=?,SOLUONGTON= ? WHERE MASP= ?";
+        String sqlCNSP = "UPDATE CHINHANH_SANPHAM SET MADT=?,SOLUONGTON= ? WHERE MASP= ? AND MACN= ?";
         try {
                     PreparedStatement psm = connection.prepareStatement(sql);
                     PreparedStatement psmCNSP = connection.prepareStatement(sqlCNSP);
@@ -512,9 +512,10 @@ public class DT_QuanLySanPham extends javax.swing.JFrame {
                     psm.setString(3,ProID);
 
                     psmCNSP.setString(1,PartnerID);
-                    psmCNSP.setString(2,BrachID);
-                    psmCNSP.setString(3,Quantity);
-                    psmCNSP.setString(4,ProID);
+                   
+                    psmCNSP.setString(2,Quantity);
+                    psmCNSP.setString(3,ProID);
+                     psmCNSP.setString(4,BrachID);
                     psmCNSP.executeUpdate();
                     psm.executeUpdate();
                     JOptionPane.showMessageDialog(null,"Cập nhập thành công");
