@@ -40,10 +40,9 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        btnUpdate = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         btnBackToHome = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -84,14 +83,14 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
 
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnUpdate.setText("Sửa");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
-        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 210, 60));
+        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -100,7 +99,7 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
                 btnBackToHomeActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 10, 210, 60));
+        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 10, 210, 60));
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnDelete.setText("Xóa");
@@ -109,16 +108,7 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 210, 60));
-
-        btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnBack.setText("Quay lại");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 210, 60));
+        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -196,6 +186,14 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void hideDeleteButton() {
+        btnDelete.hide();
+    }
+    
+    public void hideEditButton() {
+        btnEdit.hide();
+    }
+    
     public void loadData() {
         try {
             conn = DBInfo.connect();
@@ -228,7 +226,7 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
         }
     }
     
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         QTVCapNhatNhanVien adminUpdateManager = new QTVCapNhatNhanVien();
         adminUpdateManager.userID = userID;
         adminUpdateManager.userType = userType;
@@ -237,7 +235,7 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
         
         adminUpdateManager.loadData();
         adminUpdateManager.setVisible(true);
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnBackToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToHomeActionPerformed
 	QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
@@ -280,25 +278,30 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
-        admin.userID = userID;
-        admin.userType = userType;
-        admin.currentUser = currentUser;
-        
-        this.hide();
-        admin.setVisible(true);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProfileActionPerformed
-        ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
-        adminInfo.userID = userID;
-        adminInfo.userType = userType;
-        adminInfo.currentUser = userID;
-        
-        this.hide();
-        adminInfo.loadData();
-        adminInfo.setVisible(true);
+        if (Integer.parseInt(userType) == 0) {
+            ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
+            adminInfo.userID = userID;
+            adminInfo.userType = userType;
+            adminInfo.currentUser = userID;
+
+            this.hide();
+            adminInfo.hideDeleteButton();
+            adminInfo.loadData();
+            adminInfo.setVisible(true);
+        }
+        else {
+            ThongTinNhanVien managerInfo = new ThongTinNhanVien();
+            managerInfo.userID = userID;
+            managerInfo.userType = userType;
+            managerInfo.currentUser = currentUser;
+
+            this.hide();
+            managerInfo.hideEditButton();
+            managerInfo.hideDeleteButton();
+            managerInfo.loadData();
+            managerInfo.setVisible(true);
+        }
     }//GEN-LAST:event_btnViewProfileActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -343,11 +346,10 @@ public class ThongTinNhanVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBackToHome;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnViewProfile;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;

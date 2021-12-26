@@ -55,7 +55,7 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
                 else if(Integer.parseInt(TINHTRANGDH)==-1){
                     TINHTRANGDH = "ĐÃ HỦY";
                 }
-                else if(Integer.parseInt(TINHTRANGDH)==1){
+                else if(Integer.parseInt(TINHTRANGDH)== 1){
                     TINHTRANGDH = "ĐÃ GIAO";
                 }
                 String PHIVC = rs.getString("PHIVANCHUYEN");
@@ -135,6 +135,7 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -171,7 +172,7 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 210, 60));
+        jPanel8.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 10, 210, 60));
 
         btnSeeAll.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnSeeAll.setText("Xem tất cả");
@@ -180,7 +181,7 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
                 btnSeeAllActionPerformed(evt);
             }
         });
-        jPanel8.add(btnSeeAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 210, 60));
+        jPanel8.add(btnSeeAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 210, 60));
 
         btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnUpdate.setText("Cập nhập");
@@ -189,7 +190,7 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 210, 60));
+        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -224,7 +225,7 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 120, 40));
+        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 260, 40));
 
         jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 590, 260));
 
@@ -279,6 +280,15 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 880, 530));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1520, 560));
+
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLogout.setText("Đăng xuất");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 100, -1, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 780));
 
@@ -364,6 +374,12 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        DangNhap login = new DangNhap();
+        this.hide();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -404,6 +420,7 @@ public class DT_QuanLyDonHang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSeeAll;
     private javax.swing.JButton btnUpdate;

@@ -6,13 +6,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- *  Student's ID: 19127622
- *  Full name: Ngo Truong Tuyen
- *  Subject: Java Programming
- *  Assignment :
- *  Problem :
- */
 
 /**
  *
@@ -110,7 +103,7 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
                 btnEditActionPerformed(evt);
             }
         });
-        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 210, 60));
+        jPanel8.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -119,7 +112,7 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
                 btnBackToHomeActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, 210, 60));
+        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -267,9 +260,9 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
             while (rs.next()) {
                 txtName.setText(rs.getString("TENTX"));
                 txtIDCard.setText(rs.getString("CMND"));
-                txtLicensePlate.setText("BIENSOXE");
-                txtAccountNumber.setText("THONGTINTKNH");
-                txtArea.setText("KHUVUCHD");
+                txtLicensePlate.setText(rs.getString("BIENSOXE"));
+                txtAccountNumber.setText(rs.getString("THONGTINTKNH"));
+                txtArea.setText(rs.getString("KHUVUCHD"));
                 txtAddress.setText(rs.getString("DIACHI"));
                 txtPhone.setText(rs.getString("SDT"));
                 txtEmail.setText(rs.getString("EMAIL"));
@@ -309,16 +302,26 @@ public class ThongTinTaiXe extends javax.swing.JFrame {
 
     private void btnViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProfileActionPerformed
         if (Integer.parseInt(userType) == 0) {
-            QTVQuanTriNguoiDung admin = new QTVQuanTriNguoiDung();
-            admin.userID = userID;
-            admin.userType = userType;
-            admin.currentUser = currentUser;
+            ThongTinQuanTriVien adminInfo = new ThongTinQuanTriVien();
+            adminInfo.userID = userID;
+            adminInfo.userType = userType;
+            adminInfo.currentUser = userID;
 
             this.hide();
-            admin.setVisible(true);
+            adminInfo.hideDeleteButton();
+            adminInfo.loadData();
+            adminInfo.setVisible(true);
         } 
         else {
-            
+            ThongTinTaiXe driverInfo = new ThongTinTaiXe();
+            driverInfo.userID = userID;
+            driverInfo.userType = userType;
+            driverInfo.currentUser = currentUser;
+
+            this.hide();
+            driverInfo.hideEditButton();
+            driverInfo.loadData();
+            driverInfo.setVisible(true);
         }
     }//GEN-LAST:event_btnViewProfileActionPerformed
 

@@ -20,21 +20,17 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
     String savedPartnerID;
     String savedProID;
     String savedDT;
-    String savedSL;
-    
     /**
      * Creates new form DatHang_page1
      */
     public KH_DatHangPage1() {
-       savedPro = new Vector<Vector<String>>();
-       savedPartnerID="";
+        savedPro = new Vector<Vector<String>>();
+        savedPartnerID="";
         savedProID="";
         savedDT="";
-        
         initComponents(); 
         String sql ="SELECT * FROM DOITAC";
         table_load(sql);
-        
     }
     void table_load(String sql){
        // Statement statement = null;
@@ -67,21 +63,22 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         DefaultTableModel tableModel = (DefaultTableModel) TableSanPham.getModel();
        tableModel.setRowCount(0);
        tableModel.setColumnCount(0);
-       tableModel.setColumnIdentifiers(new Object[]{"Mã sản phẩm","Mã chi nhánh","Tên sản phẩm",
+       tableModel.setColumnIdentifiers(new Object[]{"Mã sản phẩm","Tên sản phẩm",
                         "Giá","Mã đối tác","Số lượng tồn"});
         try {
+          
+                    
             Statement statement = connection.createStatement();
             ResultSet rs1 = statement.executeQuery(sql1);
             while (rs1.next()) {
                 String MASP = rs1.getString("MASP");
                 savedProID = MASP;
                 String TENSP = rs1.getString("TENSP");
-                String MACN = rs1.getString("MACN");
                 String GIA = rs1.getString("GIA");
                 String MaDT = rs1.getString("MADT");
                 String SL= rs1.getString("SOLUONGTON");
                 
-                String tData[] = { MASP,MACN, TENSP, GIA,MaDT,SL};
+                String tData[] = { MASP, TENSP, GIA,MaDT,SL};
                 //      DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
                 
                 tableModel.addRow(tData);
@@ -93,9 +90,9 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         }
 
     }
-    public boolean isExistPro(String ProID,String MADT,String MACN){
+    public boolean isExistPro(String ProID,String MADT){
        // connection=DBInfo.connect();
-        String sql_check="SELECT * FROM CHINHANH_SANPHAM WHERE MASP = '" + ProID + "'  AND MADT='"+MADT+"' AND MACN='"+MACN+"'";
+        String sql_check="SELECT * FROM CHINHANH_SANPHAM WHERE MASP = '" + ProID + "'  AND MADT='"+MADT+"'";
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
@@ -148,34 +145,6 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         return false;
     }
     
-    
-    public boolean isExistPro(String ProID,String MADT){
-       // connection=DBInfo.connect();
-        String sql_check="SELECT * FROM CHINHANH_SANPHAM WHERE MASP = '" + ProID + "'  AND MADT='"+MADT+"'";
-        Statement stmt = null;
-        try {
-            stmt = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        ResultSet rs = null;
-        try {
-            rs = stmt.executeQuery(sql_check);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,  e);
-            e.printStackTrace();
-        }
-        try {
-            if(rs.next()){
-     
-                return true;
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,  e);
-            e.printStackTrace();
-        }
-        return false;
-    }
     public String getSL(String MaSP){
         String count="";
         connection = DBInfo.connect();
@@ -230,8 +199,6 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtChooseMACN = new javax.swing.JTextField();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -340,16 +307,16 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
 
         TableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Chi nhánh", "Số lượng", "Thành tiền", "Giá"
+                "Mã sản phẩm", "Tên sản phẩm", "Chi nhánh", "Số lượng", "Thành tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -412,7 +379,7 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
                 txtChooseSPActionPerformed(evt);
             }
         });
-        jPanel1.add(txtChooseSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 510, 110, 30));
+        jPanel1.add(txtChooseSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 520, 110, 30));
 
         btnSeeAll.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnSeeAll.setText("Xem tất cả");
@@ -428,11 +395,11 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
                 txtChooseSLActionPerformed(evt);
             }
         });
-        jPanel1.add(txtChooseSL, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 560, 110, 30));
+        jPanel1.add(txtChooseSL, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 570, 110, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Mã sản phẩm");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 510, 120, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 520, 120, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Mã số thuế đối tác");
@@ -443,19 +410,8 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 190, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("CN");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 610, 80, 30));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setText("Số lượng");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 560, 80, 30));
-
-        txtChooseMACN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtChooseMACNActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtChooseMACN, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 610, 110, 30));
+        jLabel4.setText("Số lượng");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 570, 80, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1540, 780));
 
@@ -468,8 +424,8 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         String ProID = txtChooseSP.getText();
         String SL = txtChooseSL.getText();
         String SLSP = getSL(ProID);
-        String CN = txtChooseMACN.getText();
-        if(isExistPro(ProID, savedPartnerID,CN)){
+         
+        if(isExistPro(ProID, savedPartnerID)){
             if (Integer.parseInt(SL)>Integer.parseInt(SLSP)){
             JOptionPane.showMessageDialog(null,"Số lượng sản phẩm phải nhỏ hơn số lượng tồn");
             return;
@@ -477,7 +433,6 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
             Vector<String>tempSP = new Vector<>();
             tempSP.add(ProID);
             tempSP.add(SL);
-            tempSP.add(CN);
             savedPro.add(tempSP);
             JOptionPane.showMessageDialog(null,"Thêm thành công");
         }
@@ -497,10 +452,7 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChooseSPActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        KH_DashBoard KH = new KH_DashBoard();// TODO add your handling code here:
-        dispose();
-        KH.setVisible(true);
-        
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtSearchDTBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchDTBarActionPerformed
@@ -593,10 +545,6 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtChooseSLActionPerformed
 
-    private void txtChooseMACNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtChooseMACNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtChooseMACNActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -648,7 +596,6 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -661,7 +608,6 @@ public class KH_DatHangPage1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField txtChooseDT;
-    private javax.swing.JTextField txtChooseMACN;
     private javax.swing.JTextField txtChooseSL;
     private javax.swing.JTextField txtChooseSP;
     private javax.swing.JTextField txtSearchDTBar;

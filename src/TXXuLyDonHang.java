@@ -54,8 +54,7 @@ public class TXXuLyDonHang extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        txtReload1 = new javax.swing.JButton();
-        txtThoat = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,23 +176,14 @@ public class TXXuLyDonHang extends javax.swing.JFrame {
         jLabel7.setText("Xử lý đơn hàng");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
-        txtReload1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        txtReload1.setText("Tải lại");
-        txtReload1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLogout.setText("Đăng xuất");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReload1ActionPerformed(evt);
+                btnLogoutActionPerformed(evt);
             }
         });
-        jPanel1.add(txtReload1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 280, 60));
-
-        txtThoat.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        txtThoat.setText("Thoát");
-        txtThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtThoatActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 110, 140, 40));
+        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 100, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -325,19 +315,15 @@ public class TXXuLyDonHang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtGetPackageActionPerformed
 
-    private void txtThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThoatActionPerformed
+    private void txtReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReloadActionPerformed
+        this.loadData();
+    }//GEN-LAST:event_txtReloadActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         DangNhap login = new DangNhap();
         this.hide();
         login.setVisible(true);
-    }//GEN-LAST:event_txtThoatActionPerformed
-
-    private void txtReload1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReload1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtReload1ActionPerformed
-
-    private void txtReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReloadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtReloadActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -375,6 +361,7 @@ public class TXXuLyDonHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -393,8 +380,6 @@ public class TXXuLyDonHang extends javax.swing.JFrame {
     private javax.swing.JButton txtGetPackage;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JButton txtReload;
-    private javax.swing.JButton txtReload1;
-    private javax.swing.JButton txtThoat;
     private javax.swing.JButton txtViewIncome;
     // End of variables declaration//GEN-END:variables
 }

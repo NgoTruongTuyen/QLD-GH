@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
  * @author zerotus
  */
 public class ThongTinQuanTriVien extends javax.swing.JFrame {
-    String userID = "QTV0001";
-    String userType = "0";
-    String currentUser = "QTV0002";
+    String userID;
+    String userType;
+    String currentUser;
     
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -98,7 +98,7 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 210, 60));
+        jPanel8.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 210, 60));
 
         btnBackToHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBackToHome.setText("Trang chủ");
@@ -107,7 +107,7 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
                 btnBackToHomeActionPerformed(evt);
             }
         });
-        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 10, 210, 60));
+        jPanel8.add(btnBackToHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, 210, 60));
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnDelete.setText("Xóa");
@@ -116,7 +116,7 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 210, 60));
+        jPanel8.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 210, 60));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 1520, 70));
 
@@ -194,6 +194,10 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
+    public void hideDeleteButton() {
+        btnDelete.hide();
+    }
+    
     public void loadData() {
         try {
             conn = DBInfo.connect();
@@ -251,7 +255,6 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
-         
             int deleteItem = JOptionPane.showConfirmDialog(null,"Bạn chắc chắn muốn xóa?",
                     "Xóa tài khoản", JOptionPane.YES_NO_OPTION);
             if (deleteItem ==  JOptionPane.YES_OPTION) {
@@ -286,6 +289,7 @@ public class ThongTinQuanTriVien extends javax.swing.JFrame {
         
         this.hide();
         adminInfo.loadData();
+        adminInfo.hideDeleteButton();
         adminInfo.setVisible(true);
     }//GEN-LAST:event_btnViewProfileActionPerformed
 
